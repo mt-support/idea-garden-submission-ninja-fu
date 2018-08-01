@@ -11,18 +11,14 @@ var gulp             = require('gulp'),
     inject           = require('gulp-inject'),
     livereload       = require('gulp-livereload');
 
-var pluginName          = 'idea-garden-submission-ninja-fu',
-    pluginPath          = 'wp-content/plugins/' + pluginName,
-	 	jsPath             = pluginPath + '/js';
-
 /**
  * Compile main plugin styles.
  */
 gulp.task('styles', function() {
-	return sass( [ pluginPath + '/styles/scss/**/*', pluginPath + '/scss/*' ] )
+	return sass( [ '/styles/scss/**/*', 'styles/scss/*' ] )
 		.pipe(autoprefixer())
 		.pipe(cleanCSS())
-		.pipe(gulp.dest(pluginPath))
+		.pipe(gulp.dest())
 		.pipe(livereload());
 });
 
@@ -35,7 +31,7 @@ gulp.task('scripts', function(){
 	])
 	.pipe(concat('scripts.js'))
 	.pipe(uglify())
-	.pipe(gulp.dest(pluginPath + '/js'))
+	.pipe(gulp.dest('/js'))
 });
 
 /**
@@ -44,8 +40,8 @@ gulp.task('scripts', function(){
 gulp.task('watch', function(){
 	livereload.listen();
 
-	gulp.watch(pluginPath + '/styles/scss/**/*', ['styles']);
-  	gulp.watch(pluginPath + '/*.php' ).on('change',function(file) {
+	gulp.watch('/styles/scss/**/*', ['styles']);
+  	gulp.watch('/php/*.php' ).on('change',function(file) {
     	livereload.changed(file.path);
 	});
 
@@ -55,7 +51,7 @@ gulp.task('watch', function(){
  * svgmin and store
  */
 gulp.task('svgstore', function(){
-	return gulp.src(pluginPath + '/assets/svg/*.svg')
+	return gulp.src('/images/svg/*.svg')
 	.pipe(svgmin(function(file){
 		var prefix= path.basename(file.relative, path.extname(file.relative));
 		return {
@@ -65,7 +61,7 @@ gulp.task('svgstore', function(){
 		}
 	}))
 	.pipe(svgstore())
-  .pipe(gulp.dest(pluginPath + '/images'));
+  .pipe(gulp.dest('/images'));
 });
 
 /**
