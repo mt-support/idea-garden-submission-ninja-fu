@@ -22,7 +22,7 @@ class Form_Submission {
 		$this->register_field_refs( $field_refs );
 		$this->setup_public_fields();
 	}
-	
+
 	private function register_field_refs( array $field_refs ) {
 		foreach ( $field_refs as $label => $reference ) {
 			$slug = preg_replace( '/[^a-z0-9]/', '_', sanitize_title( strtolower( $label ) ) );
