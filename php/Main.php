@@ -43,7 +43,7 @@ class Main {
 			return '<p class="warning">Need a valid form ID</p>';
 		}
 
-		return (string) new Public_List( $params->form );
+		return (string) new Public_List( $params );
 	}
 
 	public function dir(): string {
