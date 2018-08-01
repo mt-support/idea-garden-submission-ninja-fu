@@ -7,14 +7,9 @@ class Main {
 	private $plugin_dir = '';
 	private $plugin_url = '';
 
-	/** @var Template_Posts */
-	private $template_posts;
-
 	public function __construct( string $plugin_dir, string $plugin_url ) {
 		$this->plugin_dir = $plugin_dir;
 		$this->plugin_url = $plugin_url;
-
-		$this->template_posts();
 
 		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
 	}
@@ -57,9 +52,5 @@ class Main {
 
 	public function url(): string {
 		return $this->plugin_url;
-	}
-
-	public function template_posts(): Template_Posts {
-		return empty( $this->template_posts ) ? $this->template_posts = new Template_Posts : $this->template_posts;
 	}
 }
