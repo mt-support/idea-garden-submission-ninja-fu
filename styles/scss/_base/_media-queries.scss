@@ -1,0 +1,16 @@
+// MEDIA QUERY VARIABLES
+
+// Breakpoints
+$baby:     32px;
+$mama:     600px;
+$papa:     800px;
+$grandma:  1000px
+$grandpa:  1400px;
+
+// Media Queries
+$screen: "only screen" !default;
+$puddle: "only screen and (min-width:"#{$baby}")" !default;
+$pool: "only screen and (min-width:"#{$mama}")" !default;
+$bay: "only screen and (min-width:"#{$papa}")" !default;
+$ocean: "only screen and (min-width:"#{$grandma}")" !default;
+$sea: "only screen and (min-width:"#{$grandpa}")" !default;
