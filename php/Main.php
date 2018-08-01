@@ -12,6 +12,8 @@ class Main {
 		$this->plugin_url = $plugin_url;
 
 		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_assets' ] );
 	}
 
 	public function shortcode( array $params = [] ) {
@@ -44,6 +46,15 @@ class Main {
 		}
 
 		return (string) new Public_List( $params );
+	}
+
+	public function frontend_assets() {
+		if ( is_admin() ) {
+			return;
+		}
+
+		wp_enqueue_style( 'idea-garden-styles', $this->url() . 'styles/css/style.css' );
+		wp_enqueue_script( 'idea-gadden-script', $this->url() . 'js/scripts.js' );
 	}
 
 	public function dir(): string {
