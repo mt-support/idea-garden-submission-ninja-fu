@@ -1,0 +1,16 @@
+/*
+ Theme Name:   My Freelance Story
+ Description:  Custom theme for a blog about my freelance journey.
+ Author:       Geoff Graham
+ Author URI:   http://geoffgraham.me
+ Version:      1.0.0
+*/
+blockquote {
+  font-size: 16px;
+}
+
+.table {
+  width: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */
