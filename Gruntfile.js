@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: ['styles/scss/**/*.scss'],
-        tasks: ['sass', 'autoprefixer', 'cssmin', 'copy'],
+        tasks: ['sass', 'autoprefixer', 'cssmin'],
       },
       js: {
         files: 'js/**/*.js',
@@ -51,11 +51,11 @@ module.exports = function(grunt) {
     // css minify
     cssmin: {
       options: {
-        sourceMap: true
+        sourceMap: false
       },
       minify: {
         expand: true,
-        src: ['styles/css/style.css', '!*.min.css'],
+        src: ['styles/css/style.css', '.min.css'],
         dest: 'styles/css/',
         ext: '.css'
       }
@@ -96,22 +96,10 @@ module.exports = function(grunt) {
       }
     },
 
-    // move css files from /lib to the theme directory
-    copy: {
-      main: {
-        expand: true,
-        cwd: './',
-        src: 'styles/css/',
-        dest: './',
-        filter: 'isFile',
-      },
-    },
-
   });
 
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -121,6 +109,6 @@ module.exports = function(grunt) {
 
   // register task
   grunt.registerTask('default', ['watch']);
-  grunt.registerTask('build', ['sass', 'autoprefixer', 'cssmin', 'copy', 'uglify', 'imagemin']); 
+  grunt.registerTask('build', ['sass', 'autoprefixer', 'cssmin', 'uglify', 'imagemin']); 
 
 };
