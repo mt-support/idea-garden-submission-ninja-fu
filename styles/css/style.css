@@ -6,4 +6,39 @@ blockquote {
   width: 100%;
 }
 
+.idea-garden-public-list .voting-form .logged-out {
+  display: inline;
+}
+.idea-garden-public-list .voting-form .add-vote,
+.idea-garden-public-list .voting-form .remove-vote,
+.idea-garden-public-list .voting-form .updating {
+  display: none;
+}
+
+body.logged-in .idea-garden-public-list .voting-form .add-vote {
+  display: inline;
+}
+body.logged-in .idea-garden-public-list .voting-form .add-vote:hover,
+body.logged-in .idea-garden-public-list .voting-form .remove-vote:hover {
+  cursor: pointer;
+}
+body.logged-in .idea-garden-public-list .voting-form .remove-vote,
+body.logged-in .idea-garden-public-list .voting-form .updating,
+body.logged-in .idea-garden-public-list .voting-form .logged-out {
+  display: none;
+}
+body.logged-in .idea-garden-public-list .voting-form.voted .remove-vote {
+  display: inline;
+}
+body.logged-in .idea-garden-public-list .voting-form.voted .add-vote {
+  display: none;
+}
+body.logged-in .idea-garden-public-list .voting-form.updating .remove-vote,
+body.logged-in .idea-garden-public-list .voting-form.updating .add-vote {
+  display: none;
+}
+body.logged-in .idea-garden-public-list .voting-form.updating .updating {
+  display: inline;
+}
+
 /*# sourceMappingURL=style.css.map */

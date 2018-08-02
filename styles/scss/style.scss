@@ -35,4 +35,59 @@
 // IMPORT TEMPLATE STYLES
 //---------------------
 
+// Voting form
+.idea-garden-public-list .voting-form {
+  .logged-out {
+    display: inline;
+  }
+
+  .add-vote,
+  .remove-vote,
+  .updating {
+    display: none;
+  }
+}
+
+body.logged-in .idea-garden-public-list {
+  .voting-form {
+    .add-vote {
+      display: inline;
+    }
+
+    .add-vote,
+    .remove-vote {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .remove-vote,
+    .updating,
+    .logged-out {
+      display: none;
+    }
+
+    &.voted {
+      .remove-vote {
+        display: inline;
+      }
+
+      .add-vote {
+        display: none;
+      }
+    }
+
+    &.updating {
+      .remove-vote,
+      .add-vote {
+        display: none;
+      }
+
+      .updating {
+        display: inline;
+      }
+    }
+  }
+}
+
 
