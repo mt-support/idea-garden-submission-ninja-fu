@@ -13,15 +13,10 @@ class Public_List {
 	/** @var NF_Abstracts_ModelFactory */
 	private $form;
 
-	/**
-	 * @var NF_Database_Models_Field[]
-	 */
-	private $fields = [];
-
 	/** @var array */
 	private $field_refs = [];
 
-	private $submissions = [];
+	private $ideas = [];
 	private $vars = [];
 
 	public function __construct( stdClass $params ) {
@@ -30,31 +25,23 @@ class Public_List {
 
 	public function __toString() {
 		$this->prepare();
-		$this->vars['submissions'] = $this->submissions;
+		$this->vars['ideas'] = $this->ideas;
 		$this->vars['helper'] = $this;
 		return View::render( 'public-list', $this->vars );
 	}
 
 	private function prepare() {
 		$this->form = ninja_forms()->form( $this->form_id );
-		$this->load_fields();
 		$this->load_submissions();
 	}
 
-	private function load_fields() {
-		$this->fields = $this->form->get_fields();
-
-		foreach ( $this->fields as $field ) {
-			$this->field_refs[ $field->get_setting( 'label' ) ] = $field->get_setting( 'key' );
-		}
-	}
 
 	private function load_submissions() {
 		$ninja_submissions = Ninja_Forms()->form( $this->form_id )->get_subs();
 
 		/** @var NF_Database_Models_Submission $submission_object */
 		foreach ( $ninja_submissions as $submission_object ) {
-			$this->submissions[] = new Form_Submission( $submission_object, $this->field_refs );
+			$this->ideas[] = new Submitted_Idea( $submission_object, $this->field_refs );
 		}
 	}
 }

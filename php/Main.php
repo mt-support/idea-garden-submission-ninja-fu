@@ -6,13 +6,15 @@ use stdClass;
 class Main {
 	private $plugin_dir = '';
 	private $plugin_url = '';
+	private $voting;
 
 	public function __construct( string $plugin_dir, string $plugin_url ) {
 		$this->plugin_dir = $plugin_dir;
 		$this->plugin_url = $plugin_url;
 
-		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
+		$this->voting();
 
+		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_assets' ] );
 	}
 
@@ -63,5 +65,9 @@ class Main {
 
 	public function url(): string {
 		return $this->plugin_url;
+	}
+
+	public function voting(): Voting {
+		return empty( $this->voting ) ? $this->voting = new Voting : $this->voting;
 	}
 }
