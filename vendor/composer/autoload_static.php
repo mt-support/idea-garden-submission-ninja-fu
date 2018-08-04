@@ -11,12 +11,20 @@ class ComposerStaticInitfc15b9d37a72e80978bf3ed93d70ae63
         array (
             'Modern_Tribe\\Idea_Garden\\Ninja_Fu\\' => 34,
         ),
+        'B' => 
+        array (
+            'Badcow\\LoremIpsum\\' => 18,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Modern_Tribe\\Idea_Garden\\Ninja_Fu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/php',
+        ),
+        'Badcow\\LoremIpsum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/badcow/lorem-ipsum/lib',
         ),
     );
 

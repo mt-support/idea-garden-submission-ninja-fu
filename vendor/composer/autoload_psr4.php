@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Modern_Tribe\\Idea_Garden\\Ninja_Fu\\' => array($baseDir . '/php'),
+    'Badcow\\LoremIpsum\\' => array($vendorDir . '/badcow/lorem-ipsum/lib'),
 );

@@ -11,12 +11,19 @@ class Ninja_Forms {
 	 * the field reference (which is the string used internally by Ninja Forms to reference field
 	 * data, etc).
 	 *
-	 * @param NF_Database_Models_Submission $form_submission
+	 * @param int|NF_Database_Models_Submission $identifier
 	 *
 	 * @return array
 	 */
-	public static function get_form_fields_array( NF_Database_Models_Submission $form_submission ) {
-		$form_id = $form_submission->get_form_id();
+	public static function get_form_fields_array( $identifier ) {
+		// Support discovery of the form ID from a form submission
+		if ( is_object( $identifier ) && is_a( $identifier, 'NF_Database_Models_Submission' ) ) {
+			$form_id = $identifier->get_form_id();
+		}
+		// Default to treating the identifier as the form ID
+		else {
+			$form_id = (int) $identifier;
+		}
 
 		if ( ! empty( self::$form_field_arrays[ $form_id ] ) ) {
 			return self::$form_field_arrays[ $form_id ];
