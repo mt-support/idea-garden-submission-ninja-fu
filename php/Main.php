@@ -55,8 +55,8 @@ class Main {
 			return;
 		}
 
-		wp_enqueue_style( 'idea-garden-styles', $this->url() . 'styles/css/style.css' );
-		wp_enqueue_script( 'idea-gadden-script', $this->url() . 'js/scripts.js' );
+		wp_enqueue_style( 'idea-garden-styles', $this->url() . 'styles/style-min.css' );
+		wp_enqueue_script( 'idea-garden-script', $this->url() . 'js/scripts.js' );
 	}
 
 	public function dir(): string {
