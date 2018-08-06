@@ -1,7 +1,11 @@
 module.exports = {
-  combine: {
-    files: {
-      'styles/css/style-min.css': ['styles/css/style.css']
-    }
+  target: {
+    files: [{
+      expand: true,
+      cwd: 'styles/build/css',
+      src: ['*.css', '!*.min.css'],
+      dest: 'styles/css',
+      ext: '.min.css'
+    }]
   }
 }
