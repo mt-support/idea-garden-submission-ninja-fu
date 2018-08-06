@@ -8,7 +8,7 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 ?>
 
 <section class="idea-garden-public-list">
-	<div class="ig-list">
+	<div class="ig-idea-list">
 		<?php foreach ( $ideas as $idea ): ?>
 			<div class="ig-idea-list__card">
 				<div class="ig-idea-list__header">
