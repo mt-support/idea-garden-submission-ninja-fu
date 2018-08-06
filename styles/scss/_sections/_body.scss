@@ -1,0 +1,10 @@
+// BODY
+// ------------------------
+body {
+  background-color: var(--base-color);
+  display: grid;
+  height: 100vh;
+  margin: 0;
+  padding: 0 1em;
+  place-items: center center;
+}
