@@ -1,18 +1,10 @@
 // COLOR VARIABLES
 
 :root {
-  --base-color:       #6F6155;
-  --accent-color-1:   #FFD99D;
-  --white:   #fff;
-  --black:   #000;
+  --base-color:       #657786;
+  --accent-color-1:   #D8D8D8;
+  --success-color:    #60A812;
+  --error-color:      #FE7B8B;
+  --light:   #fff;
+  --dark:   #4A4A4A;
 }
-
-// Full Palette
-$mud:     #6F6155;
-$peach:   #FFD99D;
-$white:   #fff;
-$black:   #000;
-
-// Brand Colors
-$primaryColor: $mud;
-$accentColor:  $peach;

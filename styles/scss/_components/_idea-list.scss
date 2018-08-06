@@ -1,6 +1,7 @@
 // Card Component
 // Used in the public list of submitted ideas
 
-.ig-card {
+.ig-idea-list__card {
+  border: 1px solid var(--accent-color-1);
   border-radius: 4px;
 }

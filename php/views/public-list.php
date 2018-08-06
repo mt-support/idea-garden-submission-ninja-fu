@@ -8,9 +8,9 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 ?>
 
 <section class="idea-garden-public-list">
-	<ol class="ig-list">
+	<div class="ig-list">
 		<?php foreach ( $ideas as $idea ): ?>
-			<li class="ig-idea-list__card">
+			<div class="ig-idea-list__card">
 				<div class="ig-idea-list__header">
 					<?php echo get_avatar(); ?>
 					<h1> <?php echo esc_html( $idea->idea ); ?> </h1>
@@ -27,7 +27,7 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 				</div>
 
                 <?php do_action( 'idea_garden.ninja_fu.submission_voting_form', $idea ); ?>
-			</li>
+</div>
 		<?php endforeach; ?>
-	</ol>
+</div>
  </section>
