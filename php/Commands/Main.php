@@ -132,6 +132,14 @@ class Main {
 		return join( "\n\n", $paragraphs );
 	}
 
+	/**
+	 * Apply votes to our latest submission.
+	 *
+	 * @param int  $submission_id
+	 * @param int  $min_votes
+	 * @param int  $max_votes
+	 * @param bool $do_fake_votes
+	 */
 	private function add_votes( int $submission_id, int $min_votes, int $max_votes, bool $do_fake_votes ) {
 		$votes = new Votes( $submission_id );
 		$voters = $this->get_voters( rand( $min_votes, $max_votes ), $do_fake_votes );
@@ -141,21 +149,32 @@ class Main {
 		}
 	}
 
+	/**
+	 * Supply a randomish number of user IDs to act as voters.
+	 * 
+	 * @param int $how_many
+	 * @param bool $do_fake_votes
+	 *
+	 * @return array
+	 */
 	private function get_voters( int $how_many, bool $do_fake_votes ): array {
 		$voter_list = [];
 		$user_ids = $this->user_id_list();
 		shuffle( $user_ids );
 
 		for ( $i = 0; $i < $how_many; $i++ ) {
+			// Pull from our list of real users to start with
 			if ( ! empty( $user_ids ) ) {
 				$voter_list[] = array_shift( $user_ids );
 				continue;
 			}
 
+			// If we are not allowing fake votes, bail here
 			if ( ! $do_fake_votes ) {
 				break;
 			}
 
+			// Otherwise ... let's create some fake user IDs to make up the quota
 			while ( true ) {
 				$pos_rand_id = rand( 1, 10000000 );
 
@@ -169,8 +188,13 @@ class Main {
 		return $voter_list;
 	}
 
-	private function user_id_list() {
-		static $user_id_list;
+	/**
+	 * Returs a list of all (or almost all!) user IDs.
+	 *
+	 * @return array
+	 */
+	private function user_id_list(): array {
+		static $user_id_list = [];
 
 		if ( empty( $user_id_list ) ) {
 			$query = new WP_User_Query( [
