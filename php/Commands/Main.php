@@ -151,7 +151,7 @@ class Main {
 
 	/**
 	 * Supply a randomish number of user IDs to act as voters.
-	 * 
+	 *
 	 * @param int $how_many
 	 * @param bool $do_fake_votes
 	 *
