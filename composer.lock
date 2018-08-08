@@ -4,32 +4,39 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f88cd33eb6c4510e25b2bdc71e462bd",
+    "content-hash": "112d7de25ee863beda55f2172dd3a1fe",
     "packages": [
         {
-            "name": "badcow/lorem-ipsum",
-            "version": "v1.1.1",
+            "name": "fzaninotto/faker",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Badcow/LoremIpsum.git",
-                "reference": "7e685497e92d71d0ebbd067d51892f3308cc72e1"
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Badcow/LoremIpsum/zipball/7e685497e92d71d0ebbd067d51892f3308cc72e1",
-                "reference": "7e685497e92d71d0ebbd067d51892f3308cc72e1",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": "^5.3.3 || ^7.0"
             },
-            "suggest": {
-                "twig/twig": "Twig is a template language for PHP, released under the new BSD license (code and documentation)."
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Badcow\\LoremIpsum\\": "lib/"
+                    "Faker\\": "src/Faker/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -38,16 +45,16 @@
             ],
             "authors": [
                 {
-                    "name": "Sam Williams",
-                    "email": "sam@badcow.co"
-                },
-                {
-                    "name": "Mathew Tinsley",
-                    "email": "tinsley@tinsology.net"
+                    "name": "François Zaninotto"
                 }
             ],
-            "description": "Lorem ipsum generator.",
-            "time": "2015-04-10T00:15:43+00:00"
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2018-07-12T10:23:15+00:00"
         }
     ],
     "packages-dev": [],

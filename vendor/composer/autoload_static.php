@@ -11,9 +11,9 @@ class ComposerStaticInitfc15b9d37a72e80978bf3ed93d70ae63
         array (
             'Modern_Tribe\\Idea_Garden\\Ninja_Fu\\' => 34,
         ),
-        'B' => 
+        'F' => 
         array (
-            'Badcow\\LoremIpsum\\' => 18,
+            'Faker\\' => 6,
         ),
     );
 
@@ -22,9 +22,9 @@ class ComposerStaticInitfc15b9d37a72e80978bf3ed93d70ae63
         array (
             0 => __DIR__ . '/../..' . '/php',
         ),
-        'Badcow\\LoremIpsum\\' => 
+        'Faker\\' => 
         array (
-            0 => __DIR__ . '/..' . '/badcow/lorem-ipsum/lib',
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
     );
 
