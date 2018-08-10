@@ -342,22 +342,37 @@ template {
 .ig-idea-list__card {
   border: 1px solid var(--accent-color-1);
   border-radius: 4px;
-  padding: 1.5em;
+}
+.ig-idea-list__content {
+  padding: 1.5em 1.5em 0;
 }
 .ig-idea-list__header {
+  -ms-flex-align: center;
+  align-items: center;
+  box-shadow: 0px 4px 25px var(--accent-color-1);
   display: -ms-flexbox;
   display: flex;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   -ms-flex-pack: start;
   justify-content: flex-start;
+  padding: 0.75em 1.5em;
+  width: 100%;
 }
 .ig-idea-list__header img {
-  -ms-flex-preferred-size: 50px;
-  flex-basis: 50px;
-  height: 50px;
-  margin-right: 1.5em;
-  width: 50px;
+  margin-right: 0.25em;
+  width: 35px;
+}
+.ig-idea-list__product {
+  -ms-flex: auto;
+  flex: auto;
+}
+.ig-idea-list__status {
+  background-color: var(--success-color);
+  color: var(--light);
+  font-size: 12px;
+  padding: 0.1666666667em 0.75em;
+  text-transform: uppercase;
 }
 .ig-idea-list__title {
   -ms-flex: 50%;
@@ -365,38 +380,27 @@ template {
   margin-top: 0;
 }
 .ig-idea-list__meta {
-  -ms-flex-line-pack: distribute;
-  align-content: space-around;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+  -ms-flex-align: center;
+  align-items: center;
+  border-top: 1px solid var(--accent-color-1);
   color: var(--base-color);
   display: -ms-flexbox;
   display: flex;
-  -ms-flex: 100%;
-  flex: 100%;
-  -ms-flex-flow: row;
-  flex-flow: row;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  padding: 0.75em 1.5em;
 }
-.ig-idea-list__status {
-  background-color: var(--success-color);
-  color: var(--light);
-  font-size: 14px;
-  -ms-flex-order: 1;
-  order: 1;
-  padding: 0.1875em 0.75em;
-  text-transform: uppercase;
+.ig-idea-list__meta svg {
+  margin-right: 0.5em;
+  position: relative;
+  width: 20px;
 }
-.ig-idea-list__date, .ig-idea-list__product {
-  text-align: center;
-}
-.ig-idea-list__date {
-  -ms-flex-order: 2;
-  order: 2;
-  padding: 0 1.5em;
-}
-.ig-idea-list__product {
-  -ms-flex-order: 3;
-  order: 3;
+
+.ig-voting-form {
+  -ms-flex: auto;
+  flex: auto;
 }
 
 /*# sourceMappingURL=style.css.map */
