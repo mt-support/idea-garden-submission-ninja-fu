@@ -342,6 +342,61 @@ template {
 .ig-idea-list__card {
   border: 1px solid var(--accent-color-1);
   border-radius: 4px;
+  padding: 1.5em;
+}
+.ig-idea-list__header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+.ig-idea-list__header img {
+  -ms-flex-preferred-size: 50px;
+  flex-basis: 50px;
+  height: 50px;
+  margin-right: 1.5em;
+  width: 50px;
+}
+.ig-idea-list__title {
+  -ms-flex: 50%;
+  flex: 50%;
+  margin-top: 0;
+}
+.ig-idea-list__meta {
+  -ms-flex-line-pack: distribute;
+  align-content: space-around;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  color: var(--base-color);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 100%;
+  flex: 100%;
+  -ms-flex-flow: row;
+  flex-flow: row;
+}
+.ig-idea-list__status {
+  background-color: var(--success-color);
+  color: var(--light);
+  font-size: 14px;
+  -ms-flex-order: 1;
+  order: 1;
+  padding: 0.1875em 0.75em;
+  text-transform: uppercase;
+}
+.ig-idea-list__date, .ig-idea-list__product {
+  text-align: center;
+}
+.ig-idea-list__date {
+  -ms-flex-order: 2;
+  order: 2;
+  padding: 0 1.5em;
+}
+.ig-idea-list__product {
+  -ms-flex-order: 3;
+  order: 3;
 }
 
 /*# sourceMappingURL=style.css.map */
