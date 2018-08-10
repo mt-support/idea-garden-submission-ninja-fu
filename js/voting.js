@@ -3,7 +3,7 @@ jQuery( function( $ ) {
 
 	function addVote() {
 		var $this = $( this );
-		var $form = $this.parents( '.voting-form' );
+		var $form = $this.parents( '.ig-voting-form' );
 
 		$form.addClass( 'updating' );
 		vote( $form, 'add' );
@@ -11,7 +11,7 @@ jQuery( function( $ ) {
 
 	function removeVote() {
 		var $this = $( this );
-		var $form = $this.parents( '.voting-form' );
+		var $form = $this.parents( '.ig-voting-form' );
 
 		$form.removeClass( 'voted' );
 		$form.addClass( 'updating' );
@@ -22,7 +22,7 @@ jQuery( function( $ ) {
 		var ideaId      = response.data.idea_id;
 		var userVoted   = response.data.user_voted;
 		var voteCount   = response.data.votes;
-		var $votingForm = $publicList.find( '.voting-form[data-idea-id="' + ideaId + '"]' );
+		var $votingForm = $publicList.find( '.ig-voting-form[data-idea-id="' + ideaId + '"]' );
 
 		if ( ! $votingForm.length ) {
 			return;
@@ -34,7 +34,7 @@ jQuery( function( $ ) {
 			$votingForm.addClass( 'voted' );
 		}
 
-		$votingForm.find( '.num-votes' ).html( voteCount );
+		$votingForm.find( '.ig-voting-form__votes' ).html( voteCount );
 	}
 
 	function vote( $form, action ) {
@@ -53,6 +53,6 @@ jQuery( function( $ ) {
 		);
 	}
 
-	$publicList.on( 'click', '.add-vote', addVote );
-	$publicList.on( 'click', '.remove-vote', removeVote );
+	$publicList.on( 'click', '.ig-voting-form__vote', addVote );
+	$publicList.on( 'click', '.ig-voting-form__remove', removeVote );
 } );

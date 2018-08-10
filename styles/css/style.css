@@ -403,34 +403,34 @@ template {
   flex: auto;
 }
 
-.ig-idea-list .voting-form .add-vote,
-.ig-idea-list .voting-form .remove-vote,
-.ig-idea-list .voting-form .updating {
+.ig-idea-list .ig-voting-form .ig-voting-form__vote,
+.ig-idea-list .ig-voting-form .ig-voting-form__remove,
+.ig-idea-list .ig-voting-form .ig-voting-form__is-updating {
   display: none;
 }
-.ig-idea-list .voting-form .logged-out {
+.ig-idea-list .ig-voting-form .ig-voting-form__is-logged-out {
   display: inline;
 }
 
-.logged-in .ig-idea-list .voting-form .add-vote {
+.logged-in .ig-idea-list .ig-voting-form .ig-voting-form__vote {
   display: inline;
 }
-.logged-in .ig-idea-list .voting-form .logged-out,
-.logged-in .ig-idea-list .voting-form .remove-vote,
-.logged-in .ig-idea-list .voting-form .updating {
+.logged-in .ig-idea-list .ig-voting-form .ig-voting-form__is-logged-out,
+.logged-in .ig-idea-list .ig-voting-form .ig-voting-form__remove,
+.logged-in .ig-idea-list .ig-voting-form .ig-voting-form__is-updating {
   display: none;
 }
-.logged-in .ig-idea-list .voting-form.voted .add-vote {
+.logged-in .ig-idea-list .ig-voting-form.voted .ig-voting-form__vote {
   display: none;
 }
-.logged-in .ig-idea-list .voting-form.voted .remove-vote {
+.logged-in .ig-idea-list .ig-voting-form.voted .ig-voting-form__remove {
   display: inline;
 }
-.logged-in .ig-idea-list .voting-form.updating .updating {
+.logged-in .ig-idea-list .ig-voting-form.updating .ig-voting-form__is-updating {
   display: inline;
 }
-.logged-in .ig-idea-list .voting-form.updating .add-vote,
-.logged-in .ig-idea-list .voting-form.updating .remove-vote {
+.logged-in .ig-idea-list .ig-voting-form.updating .ig-voting-form__vote,
+.logged-in .ig-idea-list .ig-voting-form.updating .ig-voting-form__remove {
   display: none;
 }
 
