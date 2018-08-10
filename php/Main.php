@@ -1,17 +1,20 @@
 <?php
 namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 
+use Modern_Tribe\Idea_Garden\Ninja_Fu\Commands\Main as Commands;
 use stdClass;
 
 class Main {
 	private $plugin_dir = '';
 	private $plugin_url = '';
 	private $voting;
+	private $commands;
 
 	public function __construct( string $plugin_dir, string $plugin_url ) {
 		$this->plugin_dir = $plugin_dir;
 		$this->plugin_url = $plugin_url;
 
+		$this->commands();
 		$this->voting();
 
 		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
@@ -69,5 +72,9 @@ class Main {
 
 	public function voting(): Voting {
 		return empty( $this->voting ) ? $this->voting = new Voting : $this->voting;
+	}
+
+	public function commands(): Commands {
+		return empty( $this->commands ) ? $this->commands = new Commands : $this->commands;
 	}
 }
