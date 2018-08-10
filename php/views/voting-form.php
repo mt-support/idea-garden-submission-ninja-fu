@@ -1,11 +1,11 @@
 <?php
+namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+
 /**
  * @var int   $idea_id
  * @var bool  $user_voted
  * @var Votes $votes
  */
-
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 ?>
 
 <div

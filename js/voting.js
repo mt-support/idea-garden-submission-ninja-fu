@@ -1,5 +1,5 @@
 jQuery( function( $ ) {
-	var $publicList = $( '.idea-garden-public-list' );
+	var $publicList = $( '.ig-idea-list' );
 
 	function addVote() {
 		var $this = $( this );
