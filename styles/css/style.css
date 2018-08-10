@@ -403,4 +403,35 @@ template {
   flex: auto;
 }
 
+.ig-idea-list .voting-form .add-vote,
+.ig-idea-list .voting-form .remove-vote,
+.ig-idea-list .voting-form .updating {
+  display: none;
+}
+.ig-idea-list .voting-form .logged-out {
+  display: inline;
+}
+
+.logged-in .ig-idea-list .voting-form .add-vote {
+  display: inline;
+}
+.logged-in .ig-idea-list .voting-form .logged-out,
+.logged-in .ig-idea-list .voting-form .remove-vote,
+.logged-in .ig-idea-list .voting-form .updating {
+  display: none;
+}
+.logged-in .ig-idea-list .voting-form.voted .add-vote {
+  display: none;
+}
+.logged-in .ig-idea-list .voting-form.voted .remove-vote {
+  display: inline;
+}
+.logged-in .ig-idea-list .voting-form.updating .updating {
+  display: inline;
+}
+.logged-in .ig-idea-list .voting-form.updating .add-vote,
+.logged-in .ig-idea-list .voting-form.updating .remove-vote {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */
