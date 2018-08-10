@@ -11,7 +11,6 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 <?php foreach ( $ideas as $idea ): ?>
 	<div class="ig-idea-list__card">
 		<div class="ig-idea-list__header">
-			<?php echo get_avatar(); ?>
 			<div class="ig-idea-list__title">
 				<h1> <?php echo esc_html( $idea->idea ); ?> </h1>
 			</div>
