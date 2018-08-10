@@ -1,0 +1,62 @@
+// Card Component
+// Used in the public list of submitted ideas
+
+.ig-idea-list {
+
+  &__card {
+    border: 1px solid var(--accent-color-1);
+    border-radius: 4px;
+    padding: $padding;
+  }
+
+  &__header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    img {
+      flex-basis: 50px;
+      height: 50px;
+      margin-right: $padding;
+      width: 50px;
+    }
+
+  }
+
+  &__title {
+    flex: 50%;
+    margin-top: 0;
+  }
+
+  &__meta {
+    align-content: space-around;
+    justify-content: flex-start;
+    color: var(--base-color);
+    display: flex;
+    flex: 100%;
+    flex-flow: row;
+  }
+
+  &__status {
+    background-color: var(--success-color);
+    color: var(--light);
+    font-size: 14px;
+    order: 1;
+    padding: $padding/8 $padding/2;
+    text-transform: uppercase;
+  }
+
+  &__date,
+  &__product {
+    text-align: center;
+  }
+
+  &__date {
+    order: 2;
+    padding: 0 $padding;
+  }
+
+  &__product {
+    order: 3;
+  }
+}
