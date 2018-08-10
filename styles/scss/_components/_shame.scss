@@ -1,0 +1,46 @@
+.ig-idea-list .voting-form {
+  .add-vote,
+  .remove-vote,
+  .updating {
+    display: none;
+  }
+
+  .logged-out {
+    display: inline;
+  }
+}
+
+.logged-in {
+  .ig-idea-list .voting-form {
+    .add-vote {
+      display: inline;
+    }
+
+    .logged-out,
+    .remove-vote,
+    .updating {
+      display: none;
+    }
+
+    &.voted {
+      .add-vote {
+        display: none;
+      }
+
+      .remove-vote {
+        display: inline;
+      }
+    }
+
+    &.updating {
+      .updating {
+        display: inline;
+      }
+
+      .add-vote,
+      .remove-vote {
+        display: none;
+      }
+    }
+  }
+}
