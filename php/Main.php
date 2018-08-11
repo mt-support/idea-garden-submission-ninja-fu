@@ -7,14 +7,18 @@ use stdClass;
 class Main {
 	private $plugin_dir = '';
 	private $plugin_url = '';
-	private $voting;
+
 	private $commands;
+	private $idea_statuses;
+	private $voting;
+
 
 	public function __construct( string $plugin_dir, string $plugin_url ) {
 		$this->plugin_dir = $plugin_dir;
 		$this->plugin_url = $plugin_url;
 
 		$this->commands();
+		$this->idea_statuses();
 		$this->voting();
 
 		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
@@ -70,11 +74,15 @@ class Main {
 		return $this->plugin_url;
 	}
 
-	public function voting(): Voting {
-		return empty( $this->voting ) ? $this->voting = new Voting : $this->voting;
-	}
-
 	public function commands(): Commands {
 		return empty( $this->commands ) ? $this->commands = new Commands : $this->commands;
+	}
+
+	public function idea_statuses(): Idea_Statuses {
+		return empty( $this->idea_statuses ) ? $this->idea_statuses = new Idea_Statuses : $this->idea_statuses;
+	}
+
+	public function voting(): Voting {
+		return empty( $this->voting ) ? $this->voting = new Voting : $this->voting;
 	}
 }
