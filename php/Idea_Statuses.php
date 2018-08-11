@@ -3,6 +3,9 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 
 use WP_Post;
 
+/**
+ * @todo add logic making 'pending' the default status for idea submissions
+ */
 class Idea_Statuses {
 	const STATES = [
 		'internal' => [
