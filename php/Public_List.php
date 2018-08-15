@@ -39,8 +39,12 @@ class Public_List {
 
 	private function load_submissions() {
 		add_action( 'pre_get_posts', [ $this, 'idea_query_constraints' ] );
+		add_filter( 'posts_orderby', [ $this, 'idea_query_ordering' ] );
+
 		$ninja_submissions = Ninja_Forms()->form( $this->form_id )->get_subs();
+
 		remove_action( 'pre_get_posts', [ $this, 'idea_query_constraints' ] );
+		remove_filter( 'posts_orderby', [ $this, 'idea_query_ordering' ] );
 
 		/** @var NF_Database_Models_Submission $submission_object */
 		foreach ( $ninja_submissions as $submission_object ) {
@@ -53,6 +57,28 @@ class Public_List {
 			return;
 		}
 
+		// Make sure our statuses are legit
+		$statuses = $this->idea_statuses_to_retrieve();
+
+		$query->set( 'post_status', $statuses );
+		$query->set( 'suppress_filters', false );
+	}
+
+	public function idea_query_ordering( string $order_sql ): string {
+		$ordering = 'CASE ';
+		$counter  = 1;
+
+		foreach ( array_reverse( $this->idea_statuses_to_retrieve() ) as $status ) {
+			$counter++;
+			$status = esc_sql( $status );
+
+			$ordering .= "WHEN post_status = '$status' THEN $counter ";
+		}
+
+		return " $ordering END DESC, $order_sql ";
+	}
+
+	private function idea_statuses_to_retrieve(): array {
 		// Has the user requested we look at specific statuses?
 		$statuses = ! empty( $_REQUEST[ 'ig-idea-statuses'] )
 			? (array) $_REQUEST[ 'ig-idea-statuses']
@@ -64,8 +90,6 @@ class Public_List {
 		}
 
 		// Make sure our statuses are legit
-		$statuses = main()->idea_statuses()->filter_statuses( $statuses );
-
-		$query->set( 'post_status', $statuses );
+		return main()->idea_statuses()->filter_statuses( $statuses );
 	}
 }
