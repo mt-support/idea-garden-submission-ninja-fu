@@ -11,8 +11,16 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 <?php foreach ( $ideas as $idea ): ?>
 	<div class="ig-idea-list__card">
 		<div class="ig-idea-list__header">
-			<img src="http://design.tri.be/tec-brand/assets/tec-cal-color-simple.png">
 			<?php foreach( (array) $idea->product as $selected_product): ?>
+				<?php
+					$icon = apply_filters( 
+						'ig_idea_icon', 
+						main()->url() . 'images/product-icon-default.gif',
+						$idea_id,
+						$submission_id
+				); ?>
+
+				<img src="<?php echo esc_url( $icon ); ?>">
 				<span class="ig-idea-list__product"> <?php echo esc_html( $selected_product ); ?> </span>
 			<?php endforeach; ?>
 				<span class="ig-idea-list__status ig-idea-list__status--<?php echo get_post_status( $idea->id ) ?>">
