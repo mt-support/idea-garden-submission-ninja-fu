@@ -68,14 +68,14 @@ class Public_List {
 		$ordering = 'CASE ';
 		$counter  = 1;
 
-		foreach ( array_reverse( $this->idea_statuses_to_retrieve() ) as $status ) {
+		foreach ( $this->idea_statuses_to_retrieve() as $status ) {
 			$counter++;
 			$status = esc_sql( $status );
 
 			$ordering .= "WHEN post_status = '$status' THEN $counter ";
 		}
 
-		return " $ordering END DESC, $order_sql ";
+		return " $ordering END ASC, $order_sql ";
 	}
 
 	private function idea_statuses_to_retrieve(): array {
