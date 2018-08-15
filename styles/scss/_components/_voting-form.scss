@@ -3,4 +3,17 @@
 
 .ig-voting-form {
   flex: auto;
+
+  &__votes {
+    margin-right: $padding;
+  }
+
+  &__vote,
+  &__remove {
+    cursor: pointer;
+  }
+
+  &:hover {
+    color: var(--dark);
+  }
 }

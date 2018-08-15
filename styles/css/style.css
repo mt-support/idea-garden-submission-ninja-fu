@@ -357,7 +357,7 @@ template {
 .ig-idea-list__header {
   -ms-flex-align: center;
   align-items: center;
-  box-shadow: 0px 4px 25px var(--accent-color-1);
+  box-shadow: 0px 3px 10px var(--accent-color-1);
   display: -ms-flexbox;
   display: flex;
   -ms-flex-flow: row wrap;
@@ -441,12 +441,22 @@ template {
 .ig-idea-list__meta svg {
   margin-right: 0.5em;
   position: relative;
+  top: 2px;
   width: 20px;
 }
 
 .ig-voting-form {
   -ms-flex: auto;
   flex: auto;
+}
+.ig-voting-form__votes {
+  margin-right: 1.5em;
+}
+.ig-voting-form__vote, .ig-voting-form__remove {
+  cursor: pointer;
+}
+.ig-voting-form:hover {
+  color: var(--dark);
 }
 
 .ig-idea-list .ig-voting-form .ig-voting-form__vote,
