@@ -374,12 +374,24 @@ template {
 .ig-idea-list__product {
   -ms-flex: auto;
   flex: auto;
+  font-size: 14px;
+}
+@media only screen and (min-width: 500px) {
+  .ig-idea-list__product {
+    font-size: 16px;
+  }
 }
 .ig-idea-list__status {
+  border-radius: 15px;
   color: var(--light);
-  font-size: 12px;
+  font-size: 10px;
   padding: 0.1666666667em 0.75em;
   text-transform: uppercase;
+}
+@media only screen and (min-width: 500px) {
+  .ig-idea-list__status {
+    font-size: 12px;
+  }
 }
 .ig-idea-list__status--internal {
   background-color: var(--internal-color);

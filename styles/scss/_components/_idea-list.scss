@@ -31,13 +31,24 @@
 
   &__product {
     flex: auto;
+    font-size: 14px;
+
+    @media #{$pool} {
+      font-size: 16px;
+    }
+    
   }
 
   &__status {
+    border-radius: 15px;
     color: var(--light);
-    font-size: 12px;
+    font-size: 10px;
     padding: $padding/9 $padding/2;
     text-transform: uppercase;
+
+    @media #{$pool} {
+      font-size: 12px;
+    }
 
     &--internal {
       background-color: var(--internal-color);
