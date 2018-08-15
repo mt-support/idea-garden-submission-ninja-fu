@@ -75,7 +75,7 @@ class Public_List {
 			$ordering .= "WHEN post_status = '$status' THEN $counter ";
 		}
 
-		return " $ordering END ASC, $order_sql ";
+		return " $ordering END DESC, $order_sql ";
 	}
 
 	private function idea_statuses_to_retrieve(): array {
