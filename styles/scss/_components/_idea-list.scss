@@ -6,6 +6,7 @@
   &__card {
     border: 1px solid var(--accent-color-1);
     border-radius: 4px;
+    margin-bottom: $padding * 1.5;
   }
 
   &__content {
@@ -33,11 +34,46 @@
   }
 
   &__status {
-    background-color: var(--success-color);
     color: var(--light);
     font-size: 12px;
     padding: $padding/9 $padding/2;
     text-transform: uppercase;
+
+    &--internal {
+      background-color: var(--internal-color);
+    }
+    
+    &--pending {
+      background-color: var(--pending-color);
+    }
+
+    &--rejected {
+      background-color: var(--rejected-color);
+    }
+    
+    &--planned {
+      background-color: var(--planned-color);
+    }
+
+    &--started {
+      background-color: var(--started-color);
+    }
+
+    &--in-development {
+      background-color: var(--in-dev-color);
+    }
+
+    &--in-testing {
+      background-color: var(--testing-color);
+    }
+
+    &--complete {
+      background-color: var(--completed-color);
+    }
+
+    &--trash {
+      background-color: var(--trashed-color);
+    }
   }
 
   &__title {

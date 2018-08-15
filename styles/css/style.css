@@ -333,15 +333,23 @@ template {
 :root {
   --base-color: #657786;
   --accent-color-1: #D8D8D8;
-  --success-color: #60A812;
-  --error-color: #FE7B8B;
   --light: #fff;
-  --dark: #4A4A4A;
+  --dark: #4A514C;
+  --internal-color: #2B474F;
+  --pending-color: #F4AF49;
+  --rejected-color: #E4554A;
+  --planned-color: #078E87;
+  --started-color: #00A38E;
+  --in-dev-color: #AB4CC4;
+  --testing-color: #157F9D;
+  --completed-color: #83B755;
+  --trash-color: #4A514C;
 }
 
 .ig-idea-list__card {
   border: 1px solid var(--accent-color-1);
   border-radius: 4px;
+  margin-bottom: 2.25em;
 }
 .ig-idea-list__content {
   padding: 1.5em 1.5em 0;
@@ -368,11 +376,37 @@ template {
   flex: auto;
 }
 .ig-idea-list__status {
-  background-color: var(--success-color);
   color: var(--light);
   font-size: 12px;
   padding: 0.1666666667em 0.75em;
   text-transform: uppercase;
+}
+.ig-idea-list__status--internal {
+  background-color: var(--internal-color);
+}
+.ig-idea-list__status--pending {
+  background-color: var(--pending-color);
+}
+.ig-idea-list__status--rejected {
+  background-color: var(--rejected-color);
+}
+.ig-idea-list__status--planned {
+  background-color: var(--planned-color);
+}
+.ig-idea-list__status--started {
+  background-color: var(--started-color);
+}
+.ig-idea-list__status--in-development {
+  background-color: var(--in-dev-color);
+}
+.ig-idea-list__status--in-testing {
+  background-color: var(--testing-color);
+}
+.ig-idea-list__status--complete {
+  background-color: var(--completed-color);
+}
+.ig-idea-list__status--trash {
+  background-color: var(--trashed-color);
 }
 .ig-idea-list__title {
   -ms-flex: 50%;

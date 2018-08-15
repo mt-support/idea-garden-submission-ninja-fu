@@ -15,7 +15,7 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 			<?php foreach( (array) $idea->product as $selected_product): ?>
 				<span class="ig-idea-list__product"> <?php echo esc_html( $selected_product ); ?> </span>
 			<?php endforeach; ?>
-			<span class="ig-idea-list__status">Open</span>
+				<span class="ig-idea-list__status ig-idea-list__status--<?php echo get_post_status( $idea->id ) ?>"> <?php echo get_post_status( $idea->id ) ?> </span>
 		</div>
 		<div class="ig-idea-list__content">
 			<div class="ig-idea-list__title">

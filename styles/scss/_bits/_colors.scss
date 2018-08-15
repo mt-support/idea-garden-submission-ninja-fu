@@ -1,10 +1,20 @@
 // COLOR VARIABLES
 
 :root {
+  // Theme Colors
   --base-color:       #657786;
   --accent-color-1:   #D8D8D8;
-  --success-color:    #60A812;
-  --error-color:      #FE7B8B;
-  --light:   #fff;
-  --dark:   #4A4A4A;
+  --light:            #fff;
+  --dark:             #4A514C;
+
+  // Status Colors
+  --internal-color:   #2B474F;
+  --pending-color:    #F4AF49;
+  --rejected-color:   #E4554A;
+  --planned-color:    #078E87;
+  --started-color:    #00A38E;
+  --in-dev-color:     #AB4CC4;
+  --testing-color:    #157F9D;
+  --completed-color:  #83B755;
+  --trash-color:      #4A514C;
 }
