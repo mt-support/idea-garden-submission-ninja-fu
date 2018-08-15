@@ -109,4 +109,16 @@ class Idea_Statuses {
 			wp_enqueue_script( 'idea-garden-statuses', main()->url() . 'js/idea-statuses.js' );
 		}
 	}
+
+	/**
+	 * Filters out any elements in $statuses which are not valid idea
+	 * post status slugs, and returns the remainder.
+	 *
+	 * @param array $statuses
+	 *
+	 * @return array
+	 */
+	public function filter_statuses( array $statuses ): array {
+		return array_intersect( $statuses, array_keys( self::STATES ) );
+	}
 }

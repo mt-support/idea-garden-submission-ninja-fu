@@ -5,6 +5,7 @@ use NF_Abstracts_ModelFactory;
 use NF_Database_Models_Field;
 use NF_Database_Models_Submission;
 use stdClass;
+use WP_Query;
 
 class Public_List {
 	/** @var int */
@@ -37,11 +38,34 @@ class Public_List {
 
 
 	private function load_submissions() {
+		add_action( 'pre_get_posts', [ $this, 'idea_query_constraints' ] );
 		$ninja_submissions = Ninja_Forms()->form( $this->form_id )->get_subs();
+		remove_action( 'pre_get_posts', [ $this, 'idea_query_constraints' ] );
 
 		/** @var NF_Database_Models_Submission $submission_object */
 		foreach ( $ninja_submissions as $submission_object ) {
 			$this->ideas[] = new Submitted_Idea( $submission_object, $this->field_refs );
 		}
+	}
+
+	public function idea_query_constraints( WP_Query $query ) {
+		if ( 'nf_sub' !== $query->get( 'post_type' ) ) {
+			return;
+		}
+
+		// Has the user requested we look at specific statuses?
+		$statuses = ! empty( $_REQUEST[ 'ig-idea-statuses'] )
+			? (array) $_REQUEST[ 'ig-idea-statuses']
+			: [];
+
+		// If not, default to the following...
+		if ( empty( $statuses ) ) {
+			$statuses = [ 'planned', 'started', 'in-development', 'in-testing' ];
+		}
+
+		// Make sure our statuses are legit
+		$statuses = main()->idea_statuses()->filter_statuses( $statuses );
+
+		$query->set( 'post_status', $statuses );
 	}
 }
