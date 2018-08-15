@@ -60,7 +60,7 @@ class Public_List {
 
 		// If not, default to the following...
 		if ( empty( $statuses ) ) {
-			$statuses = [ 'planned', 'started', 'in-development', 'in-testing' ];
+			$statuses = main()->idea_statuses()->default_statuses();
 		}
 
 		// Make sure our statuses are legit
