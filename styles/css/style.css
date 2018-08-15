@@ -441,7 +441,7 @@ template {
 .ig-idea-list__meta svg {
   margin-right: 0.5em;
   position: relative;
-  top: -1px;
+  top: 1px;
   width: 20px;
 }
 
