@@ -42,5 +42,7 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 	</div>
 	<?php endforeach; ?>
 
-    <?php echo View::render( 'pagination', [ 'helper' => $helper ] ); ?>
+    <div class="ig-pagination">
+        <?php echo View::render( 'pagination', [ 'helper' => $helper ] ); ?>
+    </div>
  </section>
