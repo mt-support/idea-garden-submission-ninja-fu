@@ -1,10 +1,10 @@
 <?php
+namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+
 /**
  * @var array       $ideas
  * @var Public_List $helper
  */
-
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 ?>
 
 <section class="ig-idea-list">
@@ -40,5 +40,7 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 		</div>
 
 	</div>
-		<?php endforeach; ?>
+	<?php endforeach; ?>
+
+    <?php echo View::render( 'pagination', [ 'helper' => $helper ] ); ?>
  </section>
