@@ -1,8 +1,7 @@
 <?php
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+namespace Modern_Tribe\Idea_Garden;
 
 use NF_Abstracts_ModelFactory;
-use NF_Database_Models_Field;
 use NF_Database_Models_Submission;
 use stdClass;
 use WP_Query;
@@ -124,7 +123,7 @@ class Public_List {
 		 * @param string   $original_order_sql
 		 * @param WP_Query $query
 		 */
-		return apply_filters( 'idea_garden.ninja_fu.public_list.order_sql', " $order_sql ", $order_sql, $query );
+		return apply_filters( 'idea_garden.public_list.order_sql', " $order_sql ", $order_sql, $query );
 	}
 
 	/**
@@ -152,7 +151,7 @@ class Public_List {
 			$ideas_per_page = 100;
 		}
 
-		return apply_filters( 'idea_garden.ninja_fu.public_list.ideas_per_page', $ideas_per_page );
+		return apply_filters( 'idea_garden.public_list.ideas_per_page', $ideas_per_page );
 	}
 
 	private function orderby_sequence() {
@@ -218,7 +217,7 @@ class Public_List {
 			$page_number = 1;
 		}
 
-		return apply_filters( 'idea_garden.ninja_fu.public_list.page_number', $page_number );
+		return apply_filters( 'idea_garden.public_list.page_number', $page_number );
 	}
 
 	/**

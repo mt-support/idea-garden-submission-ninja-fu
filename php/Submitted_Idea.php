@@ -1,10 +1,13 @@
 <?php
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+namespace Modern_Tribe\Idea_Garden;
 
 use NF_Database_Models_Submission;
 use WP_User;
 
 /**
+ * A wrapper around Ninja Form submissions, making it easier to obtain
+ * the idea author and other pieces of information.
+ *
  * @property-read WP_User $author
  * @property-read int $id
  * @property-read NF_Database_Models_Submission $submission
@@ -23,6 +26,10 @@ class Submitted_Idea {
 	/** @var array */
 	private $field_refs = [];
 
+	/**
+	 * @param int $post_id (for the form submission)
+	 * @param int $form_id (of the parent form)
+	 */
 	public function __construct( int $post_id, int $form_id ) {
 		$this->submission_object = new NF_Database_Models_Submission( $post_id, $form_id );
 		$this->id                = (int) $this->submission_object->get_id();
