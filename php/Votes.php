@@ -3,6 +3,7 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 
 class Votes {
 	const SUPPORTERS_KEY = 'ig_supporters_list';
+	const SUPPORTERS_COUNT_KEY = 'ig_supporters_count';
 
 	private $idea_id = 0;
 	private $supporters = [];
@@ -48,5 +49,6 @@ class Votes {
 
 	public function save() {
 		update_post_meta( $this->idea_id, self::SUPPORTERS_KEY, $this->supporters );
+		update_post_meta( $this->idea_id, self::SUPPORTERS_COUNT_KEY, $this->supporter_count() );
 	}
 }
