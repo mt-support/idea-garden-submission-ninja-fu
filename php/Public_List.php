@@ -112,7 +112,7 @@ class Public_List {
 
 		// Insert the status-based ordering clause into the rest of the $order_sql,
 		// respecting the calculated priority level
-		$order_sql_parts = explode( ',', $order_sql );
+		$order_sql_parts = array_filter( explode( ',', $order_sql ) );
 		array_splice( $order_sql_parts, $status_priority, 0, $ordering );
 
 		// Glue it back together and return
