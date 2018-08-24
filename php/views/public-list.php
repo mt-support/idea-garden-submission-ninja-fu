@@ -1,10 +1,10 @@
 <?php
+namespace Modern_Tribe\Idea_Garden;
+
 /**
  * @var array       $ideas
  * @var Public_List $helper
  */
-
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 ?>
 
 <section class="ig-idea-list">
@@ -43,10 +43,14 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 					<path d="M5,3 C3.896,3 2.91,3.433 2.187,4.156 C1.463,4.88 1,5.895 0.999,7 C0.999,8.105 1.463,9.088 2.187,9.813 L9,16.657 L15.844,9.813 C16.568,9.089 17,8.105 17,7 C17,5.895 16.568,4.88 15.844,4.156 L15.813,4.156 C15.089,3.432 14.104,3 13,3 C11.896,3 10.911,3.433 10.187,4.156 C9.463,4.88 9.115,5.723 8.999,6 C8.879,5.723 8.536,4.88 7.811,4.156 C7.087,3.432 6.103,3 4.998,3 L5,3 Z" id="Shape"></path>
 				</g>
 			</svg>
-			<?php do_action( 'idea_garden.ninja_fu.submission_voting_form', $idea ); ?>
+			<?php do_action( 'idea_garden.submission_voting_form', $idea ); ?>
 			<span class="ig-idea-list__date"> <?php echo get_the_date( $d = 'M j, Y' ); ?> </span>
 		</div>
 
 	</div>
-		<?php endforeach; ?>
+	<?php endforeach; ?>
+
+    <div class="ig-pagination">
+        <?php echo View::render( 'pagination', [ 'helper' => $helper ] ); ?>
+    </div>
  </section>
