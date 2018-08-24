@@ -66,6 +66,10 @@
       background-color: var(--planned-color);
     }
 
+    &--backlog {
+      background-color: var(--backlog-color);
+    }
+
     &--started {
       background-color: var(--started-color);
     }
