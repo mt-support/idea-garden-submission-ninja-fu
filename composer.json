@@ -1,7 +1,7 @@
 {
   "autoload": {
     "psr-4": {
-      "Modern_Tribe\\Idea_Garden\\": "php"
+      "Modern_Tribe\\Idea_Garden\\Ninja_Fu\\": "php"
     }
   },
   "require-dev": {

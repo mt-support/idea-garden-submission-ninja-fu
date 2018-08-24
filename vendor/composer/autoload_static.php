@@ -9,7 +9,7 @@ class ComposerStaticInitfc15b9d37a72e80978bf3ed93d70ae63
     public static $prefixLengthsPsr4 = array (
         'M' => 
         array (
-            'Modern_Tribe\\Idea_Garden\\' => 25,
+            'Modern_Tribe\\Idea_Garden\\Ninja_Fu\\' => 34,
         ),
         'F' => 
         array (
@@ -18,7 +18,7 @@ class ComposerStaticInitfc15b9d37a72e80978bf3ed93d70ae63
     );
 
     public static $prefixDirsPsr4 = array (
-        'Modern_Tribe\\Idea_Garden\\' => 
+        'Modern_Tribe\\Idea_Garden\\Ninja_Fu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/php',
         ),
