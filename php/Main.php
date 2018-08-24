@@ -1,7 +1,7 @@
 <?php
-namespace Modern_Tribe\Idea_Garden;
+namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 
-use Modern_Tribe\Idea_Garden\Commands\Main as Commands;
+use Modern_Tribe\Idea_Garden\Ninja_Fu\Commands\Main as Commands;
 use stdClass;
 
 class Main {
@@ -34,7 +34,7 @@ class Main {
 			'idea-garden'
 		);
 
-		do_action( 'idea_garden.cannot_route_shortcode_request', $params );
+		do_action( 'idea_garden.ninja_fu.cannot_route_shortcode_request', $params );
 		return $this->route( $params->view, $params );
 	}
 
@@ -42,7 +42,7 @@ class Main {
 		$handler = 'do_' . $view;
 
 		if ( $params->form === 0 || ! method_exists( $this, $handler ) ) {
-			do_action( 'idea_garden.cannot_route_request', $params );
+			do_action( 'idea_garden.ninja_fu.cannot_route_request', $params );
 			return;
 		}
 

@@ -66,6 +66,10 @@
       background-color: var(--planned-color);
     }
 
+    &--backlog {
+      background-color: var(--backlog-color);
+    }
+
     &--started {
       background-color: var(--started-color);
     }
@@ -104,7 +108,7 @@
     svg {
       margin-right: $padding/3;
       position: relative;
-      top: 2px;
+      top: 1px;
       width: 20px;
     }
   }

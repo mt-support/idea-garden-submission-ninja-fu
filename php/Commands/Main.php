@@ -1,9 +1,9 @@
 <?php
-namespace Modern_Tribe\Idea_Garden\Commands;
+namespace Modern_Tribe\Idea_Garden\Ninja_Fu\Commands;
 
 use Faker\Factory as Content_Generator;
-use Modern_Tribe\Idea_Garden\Ninja_Forms;
-use Modern_Tribe\Idea_Garden\Votes;
+use Modern_Tribe\Idea_Garden\Ninja_Fu\Ninja_Forms;
+use Modern_Tribe\Idea_Garden\Ninja_Fu\Votes;
 use NF_Abstracts_ModelFactory;
 use WP_CLI;
 use WP_User_Query;

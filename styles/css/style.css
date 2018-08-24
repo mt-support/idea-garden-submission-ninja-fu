@@ -332,18 +332,44 @@ template {
 
 :root {
   --base-color: #657786;
-  --accent-color-1: #D8D8D8;
+  --accent-color-1: #EAEAEA;
   --light: #fff;
   --dark: #4A514C;
   --internal-color: #2B474F;
   --pending-color: #F4AF49;
   --rejected-color: #E4554A;
+  --backlog-color: #416D53;
   --planned-color: #078E87;
   --started-color: #00A38E;
   --in-dev-color: #6E61A9;
   --testing-color: #157F9D;
   --completed-color: #83B755;
   --trash-color: #4A514C;
+}
+
+.ig-filters {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  margin: 1.5em 0;
+}
+.ig-filters__filter {
+  appearance: none;
+  background: var(--light);
+  border: 1px solid var(--accent-color-1);
+  border-radius: 4px;
+  cursor: pointer;
+  -ms-flex: auto;
+  flex: auto;
+  margin-right: 1.5em;
+  height: 2.25em;
+}
+.ig-filters__filter:last-of-type {
+  margin-right: 0;
+}
+.ig-filters__filter:hover {
+  background-color: var(--accent-color-1);
 }
 
 .ig-idea-list__card {
@@ -405,6 +431,9 @@ template {
 .ig-idea-list__status--planned {
   background-color: var(--planned-color);
 }
+.ig-idea-list__status--backlog {
+  background-color: var(--backlog-color);
+}
 .ig-idea-list__status--started {
   background-color: var(--started-color);
 }
@@ -441,7 +470,7 @@ template {
 .ig-idea-list__meta svg {
   margin-right: 0.5em;
   position: relative;
-  top: 2px;
+  top: 1px;
   width: 20px;
 }
 

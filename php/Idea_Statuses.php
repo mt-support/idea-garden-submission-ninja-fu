@@ -1,5 +1,5 @@
 <?php
-namespace Modern_Tribe\Idea_Garden;
+namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 
 use WP_Post;
 
@@ -7,63 +7,52 @@ use WP_Post;
  * @todo add logic making 'pending' the default status for idea submissions
  */
 class Idea_Statuses {
-	/**
-	 * Order is significant: by default we order results partly
-	 * by post status - statuses that should be featured first
-	 * ought to be listed closer to the end of the array.
-	 */
 	const STATES = [
 		'internal' => [
 			'label'   => 'Internal',
 			'public'  => false,
-			'default' => false,
+			'private' => true,
 		],
 		'pending' => [
 			'label'   => 'Pending Review',
 			'public'  => false,
-			'default' => false,
+			'private' => true,
 		],
 		'rejected' => [
 			'label'   => 'Rejected',
 			'public'  => true,
 			'private' => false,
-			'default' => false,
-		],
-		'backlog' => [
-			'label'   => 'Backlog',
-			'public'  => true,
-			'default' => true,
 		],
 		'planned' => [
 			'label'   => 'Planned',
 			'public'  => true,
-			'default' => true,
+			'private' => false,
 		],
 		'started' => [
 			'label'   => 'Started',
 			'public'  => true,
-			'default' => true,
+			'private' => false,
 		],
 		'in-development' => [
 			'label'   => 'In Development',
 			'public'  => true,
-			'default' => true,
+			'private' => false,
 		],
 		'in-testing' => [
 			'label'   => 'In Testing',
 			'public'  => true,
-			'default' => true,
+			'private' => false,
 		],
 		'complete' => [
 			'label'   => 'Complete',
 			'public'  => true,
-			'default' => false,
+			'private' => false,
 		],
 		'trash' => [
 			'no_register' => true,
 			'label'       => 'Trash',
 			'public'      => false,
-			'default'     => false,
+			'private'     => true,
 		]
 	];
 
@@ -78,10 +67,6 @@ class Idea_Statuses {
 		foreach ( self::STATES as $slug => $properties ) {
 			if ( ! empty( $properties['no_register'] ) ) {
 				continue;
-			}
-
-			if ( ! empty( $properties['public'] ) ) {
-				$properties['private'] = false;
 			}
 
 			register_post_status( $slug, $properties );
@@ -123,18 +108,6 @@ class Idea_Statuses {
 		if ( 'nf_sub' === get_post_type() ) {
 			wp_enqueue_script( 'idea-garden-statuses', main()->url() . 'js/idea-statuses.js' );
 		}
-	}
-
-	public function default_statuses() {
-		$statuses = [];
-
-		foreach ( self::STATES as $slug => $possible_default_status ) {
-			if ( ! empty( $possible_default_status['default'] ) ) {
-				$statuses[] = $slug;
-			}
-		}
-
-		return $statuses;
 	}
 
 	/**
