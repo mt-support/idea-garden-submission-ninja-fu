@@ -332,7 +332,7 @@ template {
 
 :root {
   --base-color: #657786;
-  --accent-color-1: #D8D8D8;
+  --accent-color-1: #EAEAEA;
   --light: #fff;
   --dark: #4A514C;
   --internal-color: #2B474F;
@@ -345,6 +345,31 @@ template {
   --testing-color: #157F9D;
   --completed-color: #83B755;
   --trash-color: #4A514C;
+}
+
+.ig-filters {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  margin: 1.5em 0;
+}
+.ig-filters__filter {
+  appearance: none;
+  background: var(--light);
+  border: 1px solid var(--accent-color-1);
+  border-radius: 4px;
+  cursor: pointer;
+  -ms-flex: auto;
+  flex: auto;
+  margin-right: 1.5em;
+  height: 2.25em;
+}
+.ig-filters__filter:last-of-type {
+  margin-right: 0;
+}
+.ig-filters__filter:hover {
+  background-color: var(--accent-color-1);
 }
 
 .ig-idea-list__card {
