@@ -4,6 +4,9 @@ namespace Modern_Tribe\Idea_Garden;
 /**
  * @var Public_List $helper
  */
+
+$product_field = Ninja_Forms::get_field_object( $this->form, 'product' );
+$product_options = Ninja_Forms::get_field_options( $product_field );
 ?>
 
 <select class="ig-filters__filter">
