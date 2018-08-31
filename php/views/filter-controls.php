@@ -5,7 +5,7 @@ namespace Modern_Tribe\Idea_Garden;
  * @var Public_List $helper
  */
 
-$product_field = Ninja_Forms::get_field_object( $helper->get_form(), 'product' );
+$product_field = Ninja_Forms::get_field_object( $helper->get_form(), 'products' );
 
 $product_options = $product_field
     ? Ninja_Forms::get_field_options( $product_field )
