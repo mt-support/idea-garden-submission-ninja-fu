@@ -5,7 +5,7 @@ namespace Modern_Tribe\Idea_Garden;
  * @var Public_List $helper
  */
 
-$product_field = Ninja_Forms::get_field_object( $this->form, 'product' );
+$product_field = Ninja_Forms::get_field_object( $helper->get_form(), 'product' );
 $product_options = Ninja_Forms::get_field_options( $product_field );
 ?>
 
@@ -16,15 +16,11 @@ $product_options = Ninja_Forms::get_field_options( $product_field );
     <nav class="ig-filters">
         <select class="ig-filters__filter">
             <option value="" selected="selected">All Products</option>
-            <option value="The Events Calendar"></option>
-            <option value="">Events Calendar PRO</option>
-            <option value="">Event Tickets</option>
-            <option value="">Event Tickets Plus</option>
-            <option value="">Community Events</option>
-            <option value="">Community Tickets</option>
-            <option value="">Event Aggregator</option>
-            <option value="">Filter Bar</option>
-            <option value="">Eventbrite Tickets</option>
+            <?php foreach ( $product_options as $name => $value ): ?>
+                <option value="<?php echo esc_attr( $value ); ?>">
+                    <?php echo esc_html( $name ); ?>
+                </option>
+            <?php endforeach; ?>
         </select>
 
         <select class="ig-filters__filter">
