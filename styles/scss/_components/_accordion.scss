@@ -1,9 +1,7 @@
 .ig-accordion {
   background: var(--accent-color-1);
   padding: $padding/2 $padding;
-  position: relative;
   transform: translateZ(0);
-  z-index: 1;
 
   input[type="checkbox"] {
     cursor: pointer;

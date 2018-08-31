@@ -350,9 +350,7 @@ template {
 .ig-accordion {
   background: var(--accent-color-1);
   padding: 0.75em 1.5em;
-  position: relative;
   transform: translateZ(0);
-  z-index: 1;
 }
 .ig-accordion input[type="checkbox"] {
   cursor: pointer;
@@ -395,6 +393,8 @@ template {
   -ms-flex-flow: column;
   flex-flow: column;
   margin: 1.5em 0;
+  position: relative;
+  z-index: 2;
 }
 @media only screen and (min-width: 500px) {
   .ig-filters {
@@ -428,7 +428,8 @@ template {
   }
 }
 .ig-filters__filter:hover {
-  background-color: var(--accent-color-1);
+  background-color: var(--dark);
+  color: var(--light);
 }
 
 .ig-idea-list__card {
