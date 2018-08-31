@@ -7,9 +7,9 @@ namespace Modern_Tribe\Idea_Garden;
  */
 ?>
 
-<nav class="ig-filters">
-    <?php echo View::render( 'filter-controls', [ 'helper' => $helper ] ); ?>
-</nav>
+<div class="ig-accordion">
+	<?php echo View::render( 'filter-controls', [ 'helper' => $helper ] ); ?>
+</div>
 
 <section class="ig-idea-list">
 <?php foreach ( $ideas as $idea ): ?>
