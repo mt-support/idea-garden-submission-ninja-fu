@@ -1,56 +1,45 @@
 .ig-accordion {
-  margin: 0 auto;
-  background: #fff;
+  background: var(--accent-color-1);
+  padding: $padding/2 $padding;
   transform: translateZ(0);
-  box-shadow: 0 1px 1px rgba(0,0,0,.1);
 
   input[type="checkbox"] {
-    position: absolute;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
     opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
   
-  label {
+  &__label {
     position: relative;
-    display: block;
+    display: inline-block;
     height: 50px;
     line-height: 50px;
-    padding: 0 20px;
-    font-size: 14px;
     font-weight: 700;
-    border-top: 1px solid #ddd;
-    background: #fff;
-    cursor: pointer;
+  }
+
+  &__icon {
+    display: inline-block;
+    float: right;
+    height: 20px;
+    width: 20px;
+    margin-top: 1em;
   }
   
-  label[for*='1'] {
-    border: 0;
-  }
-  
-  label:after {
-    position: absolute;
-    top: 0px;
-    right: 20px;
-    transform: rotate(90deg);
-    transition: .3s transform;
-  }
-  
-  section {
+  .ig-accordion__content {
     height: 0;
-    transition: .3s all;
     overflow: hidden;
+    transition: .3s all;
   }
   
-  #toggle1:checked ~ label[for*='1']:after,
-  #toggle2:checked ~ label[for*='2']:after,
-  #toggle3:checked ~ label[for*='3']:after,
-  #toggle4:checked ~ label[for*='4']:after {
-    transform: rotate(0deg);
+  #panel-1:checked ~ .ig-accordion__icon {
+    transform: rotate(180deg);
   }
   
-  #toggle1:checked ~ #content1,
-  #toggle2:checked ~ #content2,
-  #toggle3:checked ~ #content3,
-  #toggle4:checked ~ #content4 {
+  #panel-1:checked ~ .ig-accordion__content {
     display: contents;
   }
 }
