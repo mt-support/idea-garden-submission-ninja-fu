@@ -1,5 +1,5 @@
 <?php
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+namespace Modern_Tribe\Idea_Garden;
 
 /**
  * @var int   $idea_id

@@ -6,7 +6,7 @@
  * Author:      The Idea Garden Crew
  */
 
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+namespace Modern_Tribe\Idea_Garden;
 
 require 'vendor/autoload.php';
 
