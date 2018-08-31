@@ -1,7 +1,11 @@
 .ig-filters {
   display: flex;
-  flex-wrap: nowrap;
+  flex-flow: column;
   margin: $padding 0;
+
+  @media #{$pool} {
+    flex-flow: row wrap;
+  }
 
   &__filter {
     appearance: none;
@@ -9,13 +13,22 @@
     border: 1px solid var(--accent-color-1);
     border-radius: 4px;
     cursor: pointer;
-    flex: auto;
+    flex: 100%;
     margin-right: $padding;
+    margin-bottom: $padding;
     height: $padding*1.5;
+
+    @media #{$bay} {
+      flex: 1;
+      flex-flow: row wrap;
+    }
     
     &:last-of-type {
-      margin-right: 0;
-    } 
+
+      @media #{$bay} {
+        margin-right: 0;
+      }
+    }
 
     &:hover {
       background-color: var(--accent-color-1);
