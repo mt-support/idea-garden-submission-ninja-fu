@@ -6,7 +6,10 @@ namespace Modern_Tribe\Idea_Garden;
  */
 
 $product_field = Ninja_Forms::get_field_object( $helper->get_form(), 'product' );
-$product_options = Ninja_Forms::get_field_options( $product_field );
+
+$product_options = $product_field
+    ? Ninja_Forms::get_field_options( $product_field )
+    : [];
 ?>
 
 <input id="toggle1" type="checkbox" name="toggle" />
