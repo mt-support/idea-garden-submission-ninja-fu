@@ -240,6 +240,10 @@ class Public_List {
 		return main()->idea_statuses()->filter_statuses( $statuses );
 	}
 
+	public function get_form() {
+		return $this->form;
+	}
+
 	public function get_current_page(): int {
 		return $this->page;
 	}
