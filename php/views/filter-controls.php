@@ -50,4 +50,4 @@ $product_options = $product_field
             <option value="">Votes</option>
         </select>
     </nav>
-  </section>
+  </div>
