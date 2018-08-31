@@ -12,18 +12,25 @@ $product_options = $product_field
     : [];
 ?>
 
-<input id="toggle1" type="checkbox" name="toggle" />
-<label for="toggle1">Filters</label>
+<input id="panel-1" class="ig-accordion__panel" type="checkbox" name="panel" />
+	<label class="ig-accordion__label" for="panel-1">Filters</label>
+	<svg class="ig-accordion__icon" data-icon="chevron" data-containerTransform="translate(0 12)" data-width="null" data-height="null" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 128 128">
+		<path d="M0 .688v22.625l58.344 58.344 5.656 5.656 5.656-5.656 58.344-58.344v-22.625l-64 64-64-64z" transform="translate(0 12)" />
+	</svg>
 
-<section id="content1">
+  <div class="ig-accordion__content">
     <nav class="ig-filters">
         <select class="ig-filters__filter">
             <option value="" selected="selected">All Products</option>
-            <?php foreach ( $product_options as $name => $value ): ?>
-                <option value="<?php echo esc_attr( $value ); ?>">
-                    <?php echo esc_html( $name ); ?>
-                </option>
-            <?php endforeach; ?>
+            <option value="The Events Calendar"></option>
+            <option value="">Events Calendar PRO</option>
+            <option value="">Event Tickets</option>
+            <option value="">Event Tickets Plus</option>
+            <option value="">Community Events</option>
+            <option value="">Community Tickets</option>
+            <option value="">Event Aggregator</option>
+            <option value="">Filter Bar</option>
+            <option value="">Eventbrite Tickets</option>
         </select>
 
         <select class="ig-filters__filter">
@@ -43,4 +50,4 @@ $product_options = $product_field
             <option value="">Votes</option>
         </select>
     </nav>
-</section>
+  </section>
