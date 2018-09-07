@@ -18,5 +18,9 @@
     "grunt-php": "^0.4.0",
     "grunt-svgstore": "0.0.3",
     "load-grunt-config": "^0.8.0"
+  },
+  "dependencies": {
+    "npm": "^6.4.1",
+    "update": "^0.7.4"
   }
 }

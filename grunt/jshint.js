@@ -1,3 +1,8 @@
 module.exports = {
-  beforeconcat: ['js/*.js']
+  options: {
+    beforeconcat: ['js/*.js'],
+  },
+  globals: {
+    jQuery: true
+  },
 }
