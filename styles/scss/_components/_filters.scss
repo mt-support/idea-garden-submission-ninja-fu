@@ -2,9 +2,14 @@
   background-color: var(--accent-color-1);
   display: flex;
   flex-flow: column;
+  justify-content: space-evenly;
   padding: $padding $padding 0;
   position: relative;
   z-index: 2;
+
+  @media #{$bay} {
+    flex-flow: row;
+  }
 
   &__filter {
     appearance: none;
@@ -15,6 +20,10 @@
     flex: 100%;
     margin-bottom: $padding;
     height: $padding*1.5;
+
+    @media #{$bay} {
+      margin-right: $padding/2;
+    }
     
     &:last-of-type {
 

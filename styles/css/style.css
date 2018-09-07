@@ -428,9 +428,17 @@ template {
   display: flex;
   -ms-flex-flow: column;
   flex-flow: column;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
   padding: 1.5em 1.5em 0;
   position: relative;
   z-index: 2;
+}
+@media only screen and (min-width: 1000px) {
+  .ig-filters {
+    -ms-flex-flow: row;
+    flex-flow: row;
+  }
 }
 .ig-filters__filter {
   appearance: none;
@@ -442,6 +450,11 @@ template {
   flex: 100%;
   margin-bottom: 1.5em;
   height: 2.25em;
+}
+@media only screen and (min-width: 1000px) {
+  .ig-filters__filter {
+    margin-right: 0.75em;
+  }
 }
 @media only screen and (min-width: 1000px) {
   .ig-filters__filter:last-of-type {
@@ -472,8 +485,8 @@ template {
   display: flex;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   padding: 0.75em 1.5em;
   width: 100%;
 }

@@ -27,6 +27,19 @@ namespace Modern_Tribe\Idea_Garden;
 				<img src="<?php echo esc_url( $icon ); ?>">
 				<span class="ig-idea-list__product"> <?php echo esc_html( $selected_product ); ?> </span>
 			<?php endforeach; ?>
+
+				<?php
+						$icon = apply_filters( 
+							'ig_idea_icon', 
+							main()->url() . 'images/product-icon-default.gif',
+							$idea_id,
+							$submission_id
+				); ?>
+
+				<?php if ( empty( $idea->product ) ) { ?>
+						<img src="<?php echo esc_url( $icon ); ?>">
+				<?php } ?>
+
 				<span class="ig-idea-list__status ig-idea-list__status--<?php echo get_post_status( $idea->id ) ?>">
 					<?php echo esc_html( get_post_status_object( get_post_status( $idea->id ) )->label ); ?>
 				</span>
