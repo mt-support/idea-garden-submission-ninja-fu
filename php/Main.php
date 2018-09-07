@@ -22,7 +22,22 @@ class Main {
 		$this->voting();
 
 		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
+		add_action( 'wp_ajax_update_idea_garden_public_list', [ $this, 'public_list_updates' ] );
+		add_action( 'wp_ajax_nopriv_update_idea_garden_public_list', [ $this, 'public_list_updates' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_assets' ] );
+	}
+
+	public function public_list_updates() {
+		if ( empty( $_POST['form_id'] ) ) {
+			wp_send_json_error();
+		}
+
+		wp_send_json_success( [
+			'html' => $this->route( 'public_list', (object) [
+				'list_only' => true,
+				'form'      => (int) $_POST['form_id']
+			] ),
+		] );
 	}
 
 	public function shortcode( array $params = [] ) {

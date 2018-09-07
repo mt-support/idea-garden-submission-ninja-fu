@@ -12,8 +12,10 @@ use WP_Query;
 class Public_List {
 	private $ideas = [];
 	private $form_id = 0;
+	private $list_only = false;
 	private $max_pages = 0;
 	private $page = 1;
+	private $request_vars = [];
 	private $vars = [];
 
 	/** @var NF_Abstracts_ModelFactory */
@@ -24,18 +26,37 @@ class Public_List {
 
 	public function __construct( stdClass $params ) {
 		$this->form_id = (int) $params->form;
+		$this->list_only = (bool) @$params->list_only;
+		$this->request_vars();
+	}
+
+	private function request_vars() {
+		$key_map = [
+
+		];
 	}
 
 	public function __toString() {
 		$this->prepare();
-		$this->vars['ideas'] = $this->ideas;
-		$this->vars['helper'] = $this;
+		$this->vars['form_id']   = $this->form_id;
+		$this->vars['ideas']     = $this->ideas;
+		$this->vars['list_only'] = $this->list_only;
+		$this->vars['helper']    = $this;
 		return View::render( 'public-list', $this->vars );
 	}
 
 	private function prepare() {
 		$this->form = ninja_forms()->form( $this->form_id );
 		$this->load_submissions();
+		$this->assets();
+	}
+
+	private function assets() {
+		wp_enqueue_script( 'idea-garden-filter-bar', main()->url() . 'js/filter-bar.js', [ 'jquery' ], false, true );
+		wp_localize_script( 'idea-garden-filter-bar', 'ideaGardenFilterBar', [
+			'formId' => $this->form_id,
+			'url'     => get_admin_url( false, 'admin-ajax.php' ),
+		] );
 	}
 
 	/**
@@ -248,8 +269,8 @@ class Public_List {
 	 */
 	private function idea_statuses_to_retrieve(): array {
 		// Has the user requested we look at specific statuses?
-		$statuses = ! empty( $_REQUEST[ 'ig-idea-statuses'] )
-			? (array) $_REQUEST[ 'ig-idea-statuses']
+		$statuses = ! empty( $_REQUEST[ 'ig-status'] )
+			? (array) $_REQUEST[ 'ig-status']
 			: [];
 
 		// If not, default to the following...

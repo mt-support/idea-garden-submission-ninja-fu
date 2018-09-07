@@ -3,13 +3,17 @@ namespace Modern_Tribe\Idea_Garden;
 
 /**
  * @var array       $ideas
+ * @var bool        $list_only
+ * @var int         $form_id
  * @var Public_List $helper
  */
 ?>
 
-<div class="ig-accordion">
-	<?php echo View::render( 'filter-controls', [ 'helper' => $helper ] ); ?>
-</div>
+<?php if ( ! $list_only ): ?>
+    <div class="ig-accordion">
+        <?php echo View::render( 'filter-controls', [ 'helper' => $helper ] ); ?>
+    </div>
+<?php endif; ?>
 
 <section class="ig-idea-list">
 <?php foreach ( $ideas as $idea ): ?>
