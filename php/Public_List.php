@@ -52,17 +52,8 @@ class Public_List {
 			'post_status'    => $this->idea_statuses_to_retrieve(),
 			'paged'          => $this->page,
 			'posts_per_page' => $this->number_of_ideas_to_retrieve(),
-			'meta_query' => [
-				'form_selection' => [
-					'key'   => '_form_id',
-					'value' => $this->form_id,
-				],
-				'ig_supporter_count' => [
-					'key'  => Votes::SUPPORTERS_COUNT_KEY,
-					'type' => 'UNSIGNED',
-				],
-			],
-			'orderby' => $this->orderby_sequence(),
+			'meta_query'     => $this->meta_query(),
+			'orderby'        => $this->orderby_sequence(),
 		] );
 
 		$this->max_pages = (int) $this->query->max_num_pages;
@@ -124,6 +115,36 @@ class Public_List {
 		 * @param WP_Query $query
 		 */
 		return apply_filters( 'idea_garden.public_list.order_sql', " $order_sql ", $order_sql, $query );
+	}
+
+	private function meta_query(): array {
+		$meta_query = [
+			'form_selection' => [
+				'key'   => '_form_id',
+				'value' => $this->form_id,
+			],
+			'ig_supporter_count' => [
+				'key'  => Votes::SUPPORTERS_COUNT_KEY,
+				'type' => 'UNSIGNED',
+			],
+		];
+
+		// Get the ID of the products field
+		$products_field = Ninja_Forms::get_field_object( $this->form, 'products' );
+
+		$products_field_id = ! empty( $products_field ) && is_object( $products_field )
+			? (int) $products_field->get_id()
+			: 0;
+
+		// If the product filter is applied, let's narrow down by product
+		if ( ! empty( $_REQUEST['ig-product'] ) && $products_field_id ) {
+			$meta_query['product_selection'] = [
+				'key'   => '_field_' . $products_field_id,
+				'value' => filter_var( $_REQUEST['ig-product'], FILTER_SANITIZE_STRIPPED ),
+			];
+		}
+
+		return $meta_query;
 	}
 
 	/**
