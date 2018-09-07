@@ -1,13 +1,10 @@
 .ig-filters {
+  background-color: var(--accent-color-1);
   display: flex;
   flex-flow: column;
-  margin: $padding 0;
+  padding: $padding $padding 0;
   position: relative;
   z-index: 2;
-
-  @media #{$pool} {
-    flex-flow: row wrap;
-  }
 
   &__filter {
     appearance: none;
@@ -16,14 +13,8 @@
     border-radius: 4px;
     cursor: pointer;
     flex: 100%;
-    margin-right: $padding;
     margin-bottom: $padding;
     height: $padding*1.5;
-
-    @media #{$bay} {
-      flex: 1;
-      flex-flow: row wrap;
-    }
     
     &:last-of-type {
 

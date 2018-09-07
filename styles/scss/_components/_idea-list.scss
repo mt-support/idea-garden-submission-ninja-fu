@@ -2,6 +2,7 @@
 // Used in the public list of submitted ideas
 
 .ig-idea-list {
+  margin-top: $padding;
 
   &__card {
     border: 1px solid var(--accent-color-1);
