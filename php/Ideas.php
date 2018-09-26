@@ -27,6 +27,7 @@ class Ideas {
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
+			'show_in_rest'       => true,
 			'supports'           => [
 				'title',
 				'editor',

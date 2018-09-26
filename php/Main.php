@@ -28,7 +28,6 @@ class Main {
 		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
 		add_action( 'wp_ajax_update_idea_garden_public_list', [ $this, 'public_list_updates' ] );
 		add_action( 'wp_ajax_nopriv_update_idea_garden_public_list', [ $this, 'public_list_updates' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_assets' ] );
 	}
 
 	public function public_list_updates() {
@@ -68,16 +67,7 @@ class Main {
 		return call_user_func( [ $this, $handler ], $params );
 	}
 
-	public function do_submission_form( stdClass $params ) {
-		if ( did_action( 'wp_enqueue_scripts' ) ) {
-			add_action( 'wp_enqueue_scripts', [ $this, 'frontend_assets' ] );
-		}
-		else {
-			$this->frontend_assets();
-		}
 
-		return (string) new Submission_Form( $params );
-	}
 
 	public function do_idea_list( stdClass $params ) {
 
@@ -109,7 +99,12 @@ class Main {
 	}
 
 	public function submission_form(): Submission_Form {
-		return empty( $this->submission_form ) ? $this->submission_form = new Submission_Form : $this->submission_form;
+		if ( empty( $this->submission_form ) ) {
+			$this->submission_form = new Submission_Form;
+			$this->submission_form->setup();
+		}
+
+		return $this->submission_form;
 	}
 	
 	public function voting(): Voting {

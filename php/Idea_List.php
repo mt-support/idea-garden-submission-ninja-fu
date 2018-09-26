@@ -10,8 +10,9 @@ class Idea_List {
 			$this->frontend_assets();
 		}
 
-		return (string) new Public_List( $params );
+
 	}
+
 	public function frontend_assets() {
 		if ( is_admin() ) {
 			return;

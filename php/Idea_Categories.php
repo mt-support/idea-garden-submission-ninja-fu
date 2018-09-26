@@ -12,11 +12,7 @@ class Idea_Categories {
 		register_taxonomy(
 			self::TAXONOMY,
 			Ideas::POST_TYPE, [
-				'show_ui'      => true,
-				'show_admin'   => true,
-				'query_var'    => true,
 				'hierarchical' => true,
-				'rewrite'      => [ 'slug' => self::TAXONOMY ],
 				'labels'       => [
 					'name'              => _x( 'Categories', 'idea category taxonomy', 'idea-garden' ),
 					'singular_name'     => _x( 'Category', 'idea category taxonomy', 'idea-garden' ),
@@ -29,10 +25,24 @@ class Idea_Categories {
 					'menu_name'         => _x( 'Idea Categories', 'idea category taxonomy', 'idea-garden' ),
 					'parent_item'       => _x( 'Parent Category', 'idea category taxonomy', 'idea-garden' ),
 					'parent_item_colon' => _x( 'Parent Category:', 'idea category taxonomy', 'idea-garden' ),
-				]
+				],
+				'query_var'    => true,
+				'rewrite'      => [ 'slug' => self::TAXONOMY ],
+				'show_admin'   => true,
+				'show_in_rest' => true,
+				'show_ui'      => true,
 			]
 		);
 
 		register_taxonomy_for_object_type( self::TAXONOMY, Ideas::POST_TYPE );
+	}
+
+	public function list_all(): array {
+		$terms = get_terms( [
+			'hide_empty' => false,
+			'taxonomy'   => self::TAXONOMY,
+		] );
+
+		return is_array( $terms ) ? $terms : [];
 	}
 }
