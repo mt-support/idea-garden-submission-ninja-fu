@@ -3,9 +3,6 @@ namespace Modern_Tribe\Idea_Garden;
 
 use WP_Post;
 
-/**
- * @todo add logic making 'pending' the default status for idea submissions
- */
 class Idea_Statuses {
 	/**
 	 * Order is significant: by default we order results partly
@@ -67,10 +64,9 @@ class Idea_Statuses {
 		]
 	];
 
-	public function __construct() {
+	public function setup() {
 		add_action( 'init', [ $this, 'register' ] );
 		add_action( 'admin_print_scripts-post.php', [ $this, 'idea_statuses_script' ] );
-		add_action( 'nf_sub_edit_after_status', [ $this, 'status_selector' ] );
 		add_filter( 'get_post_status', [ $this, 'filter_post_status' ], 10, 2 );
 	}
 
@@ -86,20 +82,6 @@ class Idea_Statuses {
 
 			register_post_status( $slug, $properties );
 		}
-	}
-
-	public function status_selector( $post ) {
-		print '<select name="post_status" id="idea-status-selector">';
-
-		$status = get_post_status( $post );
-
-		foreach ( self::STATES as $slug => $properties ) {
-			print '<option value="' . esc_attr( $slug ) . '" ' . selected( $slug === $status ) . '>'
-			      . esc_html( $properties['label'] )
-			      . '</option>';
-		}
-
-		print '</select>';
 	}
 
 	/**
@@ -120,6 +102,7 @@ class Idea_Statuses {
 	}
 
 	public function idea_statuses_script() {
+		// @todo decide to either abandon this or fix to work with standard WP post editor
 		if ( 'nf_sub' === get_post_type() ) {
 			wp_enqueue_script( 'idea-garden-statuses', main()->url() . 'js/idea-statuses.js' );
 		}
