@@ -45,4 +45,9 @@ class Idea_Categories {
 
 		return is_array( $terms ) ? $terms : [];
 	}
+
+	public function is_valid_category_id( $category_id ): bool {
+		$term = get_term( $category_id, Idea_Categories::TAXONOMY );
+		return $term && ! is_wp_error( $term );
+	}
 }

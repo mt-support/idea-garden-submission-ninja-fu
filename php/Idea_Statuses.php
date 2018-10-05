@@ -13,54 +13,45 @@ class Idea_Statuses {
 		'internal' => [
 			'label'   => 'Internal',
 			'public'  => false,
-			'default' => false,
 		],
 		'pending' => [
 			'label'   => 'Pending Review',
+			'no_register' => true,
 			'public'  => false,
-			'default' => false,
 		],
 		'rejected' => [
 			'label'   => 'Rejected',
 			'public'  => true,
 			'private' => false,
-			'default' => false,
 		],
 		'backlog' => [
 			'label'   => 'Backlog',
 			'public'  => true,
-			'default' => true,
 		],
 		'planned' => [
 			'label'   => 'Planned',
 			'public'  => true,
-			'default' => true,
 		],
 		'started' => [
 			'label'   => 'Started',
 			'public'  => true,
-			'default' => true,
 		],
 		'in-development' => [
 			'label'   => 'In Development',
 			'public'  => true,
-			'default' => true,
 		],
 		'in-testing' => [
 			'label'   => 'In Testing',
 			'public'  => true,
-			'default' => true,
 		],
 		'complete' => [
 			'label'   => 'Complete',
 			'public'  => true,
-			'default' => false,
 		],
 		'trash' => [
-			'no_register' => true,
 			'label'       => 'Trash',
+			'no_register' => true,
 			'public'      => false,
-			'default'     => false,
 		]
 	];
 
@@ -106,18 +97,6 @@ class Idea_Statuses {
 		if ( 'nf_sub' === get_post_type() ) {
 			wp_enqueue_script( 'idea-garden-statuses', main()->url() . 'js/idea-statuses.js' );
 		}
-	}
-
-	public function default_statuses() {
-		$statuses = [];
-
-		foreach ( self::STATES as $slug => $possible_default_status ) {
-			if ( ! empty( $possible_default_status['default'] ) ) {
-				$statuses[] = $slug;
-			}
-		}
-
-		return $statuses;
 	}
 
 	/**

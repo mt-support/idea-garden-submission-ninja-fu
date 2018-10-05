@@ -144,6 +144,8 @@ jQuery( function( $ ) {
 	var $moreDetail  = $( '#ig-idea-submission-form__more-detail-needed' );
 	var $title       = $form.find( 'input[name="idea-title"]' );
 
+	var submissionInProgress = false;
+
 	function wordCount( text ) {
 		var count = 0;
 		var tokens = text.split( ' ' );
@@ -159,7 +161,7 @@ jQuery( function( $ ) {
 		return count;
 	}
 
-	function categoriesSelected() {
+	function countCategoriesSelected() {
 		return $categories.filter( ':checked' ).length;
 	}
 
@@ -177,7 +179,7 @@ jQuery( function( $ ) {
 		var titleWordCount = wordCount( $title.val() );
 		var descriptionWordCount = wordCount( $description.val() );
 		var totalWordCount = titleWordCount + descriptionWordCount;
-		var categoriesSelected = categoriesSelected();
+		var categoriesSelected = countCategoriesSelected();
 
 		// We want a title, a description and at least 12 words across each
 		// ...at least one category must also be selected
@@ -193,8 +195,7 @@ jQuery( function( $ ) {
 		 *       being brought to bear.
 		 */
 		conditionallyHighlight( $categories,  ! categoriesSelected );
-		conditionallyHighlight( $description, ! descriptionWordCount );
-		conditionallyHighlight( $moreDetail,  totalWordCount < 12 );
+		conditionallyHighlight( $moreDetail,  totalWordCount < 6 );
 		conditionallyHighlight( $title,       ! titleWordCount );
 
 		return ready;
@@ -203,7 +204,7 @@ jQuery( function( $ ) {
 	function onSubmission( event ) {
 		event.preventDefault();
 
-		if ( ! checkIfReadyToSubmit() ) {
+		if ( ! checkIfReadyToSubmit() || submissionInProgress ) {
 			return;
 		}
 
@@ -221,13 +222,34 @@ jQuery( function( $ ) {
 	}
 
 	function submitFormData() {
-
 		var data = {
 			categories:  getCheckedCategories(),
 			check:       ideaGardenSubmissions.safety,
-			description: $description.html(),
+			description: $description.val(),
 			title:       $title.val()
 		};
+
+		$.ajax( {
+			action:   'submit_idea',
+			data:     data,
+			dataType: 'json',
+			error:    badSubmission,
+			success:  goodSubmission,
+			type:     'POST',
+			url:      ideaGardenSubmissions.ajaxUrl
+		} );
+
+		submissionInProgress = true;
+	}
+
+	function badSubmission( response ) {
+		submissionInProgress = false;
+		// @todo Flag that the submission had gnarly attributes in need of review
+	}
+
+	function goodSubmission( response ) {
+		submissionInProgress = false;
+		// @todo flaf that the submission was received loud and lcear
 	}
 
 	$form.on( 'submit', onSubmission );
