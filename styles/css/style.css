@@ -347,29 +347,136 @@ template {
   --trash-color: #4A514C;
 }
 
+.ig-accordion {
+  border: 1px solid var(--accent-color-1);
+  border-radius: 4px;
+  margin-bottom: 1.5em;
+  padding: 0 0.75em;
+  transform: translateZ(0);
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion {
+    border: 0;
+    padding: 0;
+  }
+}
+.ig-accordion__header {
+  position: relative;
+  z-index: -1;
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion__header {
+    display: none;
+  }
+}
+.ig-accordion input[type="checkbox"] {
+  cursor: pointer;
+  height: 50px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion input[type="checkbox"] {
+    display: none;
+  }
+}
+.ig-accordion__icon {
+  display: inline;
+  fill: var(--dark);
+  height: 18px;
+  margin-right: 0.5em;
+  position: relative;
+  top: 3px;
+  width: 18px;
+  z-index: -1;
+}
+.ig-accordion__icon:hover {
+  fill: var(--base-color);
+}
+.ig-accordion__label {
+  display: inline;
+  font-weight: 300;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  z-index: -1;
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion__label {
+    display: none;
+  }
+}
+.ig-accordion__label:hover {
+  color: var(--base-color);
+}
+.ig-accordion .ig-accordion__content {
+  height: 0;
+  overflow: hidden;
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion .ig-accordion__content {
+    height: auto;
+    overflow: visible;
+  }
+}
+.ig-accordion #panel-1:checked ~ .ig-accordion__header .ig-accordion__icon {
+  fill: var(--base-color);
+}
+.ig-accordion #panel-1:checked ~ .ig-accordion__header .ig-accordion__label {
+  color: var(--base-color);
+}
+.ig-accordion #panel-1:checked ~ .ig-accordion__content {
+  display: contents;
+}
+
 .ig-filters {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   margin: 1.5em 0;
 }
-.ig-filters__filter {
-  appearance: none;
-  background: var(--light);
-  border: 1px solid var(--accent-color-1);
-  border-radius: 4px;
-  cursor: pointer;
-  -ms-flex: auto;
-  flex: auto;
-  margin-right: 1.5em;
-  height: 2.25em;
+@media only screen and (min-width: 500px) {
+  .ig-filters {
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
 }
-.ig-filters__filter:last-of-type {
-  margin-right: 0;
+.ig-filters__filter {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--accent-color-1);
+  border-radius: 0;
+  cursor: pointer;
+  -ms-flex: 1;
+  flex: 1;
+  height: 2.25em;
+  padding-left: 0.75em;
 }
 .ig-filters__filter:hover {
-  background-color: var(--accent-color-1);
+  color: var(--base-color);
+}
+.ig-filters svg {
+  left: 90%;
+  position: relative;
+  right: 0;
+  top: -30px;
+  min-height: 24px;
+  min-width: 24px;
+}
+@media only screen and (min-width: 500px) {
+  .ig-filters svg {
+    left: -25px;
+    top: 5px;
+  }
 }
 
 .ig-idea-list__card {

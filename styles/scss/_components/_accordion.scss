@@ -1,0 +1,89 @@
+.ig-accordion {
+  border: 1px solid var(--accent-color-1);
+  border-radius: 4px;
+  margin-bottom: $padding;
+  padding: 0 $padding/2;
+  transform: translateZ(0);
+
+  @media #{$pool} {
+    border: 0;
+    padding: 0;
+  }
+
+  &__header {
+    position: relative;
+    z-index: -1;
+
+    @media #{$pool} {
+      display: none;
+    }
+  }
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    height: 50px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+    @media #{$pool} {
+      display: none;
+    }
+  }
+
+  &__icon {
+    display: inline;
+    fill: var(--dark);
+    height: 18px;
+    margin-right: $padding/3;
+    position: relative;
+    top: 3px;
+    width: 18px;
+    z-index: -1;
+
+    &:hover {
+      fill: var(--base-color);
+    }
+  }
+  
+  &__label {
+    display: inline;
+    font-weight: 300;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    z-index: -1;
+
+    @media #{$pool} {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--base-color);
+    }
+  }
+  
+  .ig-accordion__content {
+    height: 0;
+    overflow: hidden;
+
+    @media #{$pool} {
+      height: auto;
+      overflow: visible;
+    }
+  }
+  
+  #panel-1:checked ~ .ig-accordion__header .ig-accordion__icon {
+    fill: var(--base-color);
+  }
+  
+  #panel-1:checked ~ .ig-accordion__header .ig-accordion__label {
+    color: var(--base-color);
+  }
+
+  #panel-1:checked ~ .ig-accordion__content {
+    display: contents;
+  }
+}
