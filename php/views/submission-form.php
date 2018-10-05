@@ -10,6 +10,10 @@ use WP_Term;
 
 <section class="ig-idea-submission-form">
 	<form method="post">
+        <p id="ig-idea-submission-form__more-detail-needed">
+            <?php esc_html_e( 'More detail needed! Please add more detail.', 'idea-garden' ); ?>
+        </p>
+
 		<label for="ig-idea-submission__idea">
 			<?php _e( 'Idea:', 'idea-garden' ); ?>
 		</label>
@@ -40,10 +44,11 @@ use WP_Term;
 		</label>
 		<textarea
 			id="ig-idea-submission__description"
+            name="idea-description"
 			cols="60"
 			rows="10"
 		></textarea>
 
-		<button><?php esc_html_e( 'Submit', 'idea-garden' ); ?></button>
+		<input type="submit" value="<?php esc_attr_e( 'Submit', 'idea-garden' ); ?>" />
 	</form>
 </section>
