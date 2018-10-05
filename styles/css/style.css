@@ -348,40 +348,85 @@ template {
 }
 
 .ig-accordion {
-  background: var(--accent-color-1);
-  padding: 0.75em 1.5em;
+  border: 1px solid var(--accent-color-1);
+  border-radius: 4px;
+  margin-bottom: 1.5em;
+  padding: 0 0.75em;
   transform: translateZ(0);
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion {
+    border: 0;
+    padding: 0;
+  }
+}
+.ig-accordion__header {
+  position: relative;
+  z-index: -1;
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion__header {
+    display: none;
+  }
 }
 .ig-accordion input[type="checkbox"] {
   cursor: pointer;
-  height: 100%;
+  height: 50px;
   left: 0;
   opacity: 0;
   position: absolute;
-  top: 0;
   width: 100%;
+  z-index: 1;
 }
-.ig-accordion__label {
-  position: relative;
-  display: inline-block;
-  height: 50px;
-  line-height: 50px;
-  font-weight: 700;
+@media only screen and (min-width: 500px) {
+  .ig-accordion input[type="checkbox"] {
+    display: none;
+  }
 }
 .ig-accordion__icon {
-  display: inline-block;
-  float: right;
-  height: 20px;
-  width: 20px;
-  margin-top: 1em;
+  display: inline;
+  fill: var(--dark);
+  height: 18px;
+  margin-right: 0.5em;
+  position: relative;
+  top: 3px;
+  width: 18px;
+  z-index: -1;
+}
+.ig-accordion__icon:hover {
+  fill: var(--base-color);
+}
+.ig-accordion__label {
+  display: inline;
+  font-weight: 300;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  z-index: -1;
+}
+@media only screen and (min-width: 500px) {
+  .ig-accordion__label {
+    display: none;
+  }
+}
+.ig-accordion__label:hover {
+  color: var(--base-color);
 }
 .ig-accordion .ig-accordion__content {
   height: 0;
   overflow: hidden;
-  transition: .3s all;
 }
-.ig-accordion #panel-1:checked ~ .ig-accordion__icon {
-  transform: rotate(180deg);
+@media only screen and (min-width: 500px) {
+  .ig-accordion .ig-accordion__content {
+    height: auto;
+    overflow: visible;
+  }
+}
+.ig-accordion #panel-1:checked ~ .ig-accordion__header .ig-accordion__icon {
+  fill: var(--base-color);
+}
+.ig-accordion #panel-1:checked ~ .ig-accordion__header .ig-accordion__label {
+  color: var(--base-color);
 }
 .ig-accordion #panel-1:checked ~ .ig-accordion__content {
   display: contents;
@@ -390,46 +435,48 @@ template {
 .ig-filters {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-flow: column;
-  flex-flow: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
   margin: 1.5em 0;
-  position: relative;
-  z-index: 2;
 }
 @media only screen and (min-width: 500px) {
   .ig-filters {
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
+    -ms-flex-direction: row;
+    flex-direction: row;
   }
 }
 .ig-filters__filter {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
-  background: var(--light);
-  border: 1px solid var(--accent-color-1);
-  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--accent-color-1);
+  border-radius: 0;
   cursor: pointer;
-  -ms-flex: 100%;
-  flex: 100%;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
+  -ms-flex: 1;
+  flex: 1;
   height: 2.25em;
-}
-@media only screen and (min-width: 1000px) {
-  .ig-filters__filter {
-    -ms-flex: 1;
-    flex: 1;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-  }
-}
-@media only screen and (min-width: 1000px) {
-  .ig-filters__filter:last-of-type {
-    margin-right: 0;
-  }
+  padding-left: 0.75em;
 }
 .ig-filters__filter:hover {
-  background-color: var(--dark);
-  color: var(--light);
+  color: var(--base-color);
+}
+.ig-filters svg {
+  left: 90%;
+  position: relative;
+  right: 0;
+  top: -30px;
+  min-height: 24px;
+  min-width: 24px;
+}
+@media only screen and (min-width: 500px) {
+  .ig-filters svg {
+    left: -25px;
+    top: 5px;
+  }
 }
 
 .ig-idea-list__card {
@@ -437,25 +484,9 @@ template {
   border-radius: 4px;
   margin-bottom: 2.25em;
 }
-.ig-idea-list__content {
-  padding: 1.5em 1.5em 0;
-}
-.ig-idea-list__header {
-  -ms-flex-align: center;
-  align-items: center;
-  box-shadow: 0px 3px 10px var(--accent-color-1);
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  padding: 0.75em 1.5em;
-  width: 100%;
-}
-.ig-idea-list__header img {
-  margin-right: 0.25em;
-  width: 35px;
+.ig-idea-list__title {
+  margin-top: 0;
+  padding: 0.75em;
 }
 .ig-idea-list__product {
   -ms-flex: auto;
@@ -466,6 +497,17 @@ template {
   .ig-idea-list__product {
     font-size: 16px;
   }
+}
+.ig-idea-list__footer {
+  background-color: var(--accent-color-1);
+  border-top: 1px solid var(--accent-color-1);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding: 0.75em;
 }
 .ig-idea-list__status {
   border-radius: 15px;
@@ -509,28 +551,10 @@ template {
 .ig-idea-list__status--trash {
   background-color: var(--trashed-color);
 }
-.ig-idea-list__title {
-  -ms-flex: 50%;
-  flex: 50%;
-  margin-top: 0;
-}
-.ig-idea-list__meta {
-  -ms-flex-align: center;
-  align-items: center;
-  border-top: 1px solid var(--accent-color-1);
-  color: var(--base-color);
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  padding: 0.75em 1.5em;
-}
-.ig-idea-list__meta svg {
+.ig-idea-list svg {
   margin-right: 0.5em;
   position: relative;
-  top: 1px;
+  top: -3px;
   width: 20px;
 }
 

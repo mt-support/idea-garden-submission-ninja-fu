@@ -1,40 +1,42 @@
 .ig-filters {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
+  flex-wrap: nowrap;
   margin: $padding 0;
-  position: relative;
-  z-index: 2;
 
   @media #{$pool} {
-    flex-flow: row wrap;
+    flex-direction: row;
   }
 
   &__filter {
-    appearance: none;
-    background: var(--light);
-    border: 1px solid var(--accent-color-1);
-    border-radius: 4px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--accent-color-1);
+    border-radius: 0;
     cursor: pointer;
-    flex: 100%;
-    margin-right: $padding;
-    margin-bottom: $padding;
+    flex: 1;
     height: $padding*1.5;
-
-    @media #{$bay} {
-      flex: 1;
-      flex-flow: row wrap;
-    }
-    
-    &:last-of-type {
-
-      @media #{$bay} {
-        margin-right: 0;
-      }
-    }
+    padding-left: $padding/2;
 
     &:hover {
-      background-color: var(--dark);
-      color: var(--light);
+      color: var(--base-color);
+    }
+  }
+
+  svg {
+    left: 90%;
+    position: relative;
+    right: 0;
+    top: -30px;
+    min-height: 24px;
+    min-width: 24px;
+
+    @media #{$pool} {
+      left: -25px;
+      top: 5px;
     }
   }
 }
