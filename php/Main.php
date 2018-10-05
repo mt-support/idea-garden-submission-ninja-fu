@@ -25,7 +25,6 @@ class Main {
 		$this->idea_list();
 		$this->voting();
 
-		add_shortcode( 'idea-garden', [ $this, 'shortcode' ] );
 		add_action( 'wp_ajax_update_idea_garden_public_list', [ $this, 'public_list_updates' ] );
 		add_action( 'wp_ajax_nopriv_update_idea_garden_public_list', [ $this, 'public_list_updates' ] );
 	}
@@ -67,8 +66,6 @@ class Main {
 		return call_user_func( [ $this, $handler ], $params );
 	}
 
-
-
 	public function do_idea_list( stdClass $params ) {
 
 	}
@@ -86,7 +83,12 @@ class Main {
 	}
 
 	public function idea_list(): Idea_List {
-		return empty( $this->idea_list ) ? $this->idea_list = new Idea_List : $this->idea_list;
+		if ( empty( $this->idea_list ) ) {
+			$this->idea_list = new Idea_List;
+			$this->idea_list->setup();
+		}
+
+		return $this->idea_list;
 	}
 
 	public function ideas(): Ideas {

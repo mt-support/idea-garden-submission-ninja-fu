@@ -68,7 +68,7 @@ namespace Modern_Tribe\Idea_Garden;
 <?php foreach ( $ideas as $idea ): ?>
 	<div class="ig-idea-list__card">
 			<div class="ig-idea-list__title">
-					<h1> <?php echo esc_html( $idea->idea ); ?> </h1>
+					<h1> <?php echo esc_html( $idea->post_title ); ?> </h1>
 
 					<span class="ig-idea-list__product">
 						<?php echo esc_html( $selected_product ); ?> 
@@ -86,8 +86,8 @@ namespace Modern_Tribe\Idea_Garden;
 		
 					<?php do_action( 'idea_garden.ninja_fu.submission_voting_form', $idea ); ?>
 
-					<span class="ig-idea-list__status ig-idea-list__status--<?php echo get_post_status( $idea->id ) ?>">
-						<?php echo esc_html( get_post_status_object( get_post_status( $idea->id ) )->label ); ?>
+					<span class="ig-idea-list__status ig-idea-list__status--<?php echo get_post_status( $idea->ID ) ?>">
+						<?php echo esc_html( get_post_status_object( get_post_status( $idea->ID ) )->label ); ?>
 					</span>
 			</div>
 		</div>
