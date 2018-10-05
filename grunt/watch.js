@@ -3,8 +3,8 @@ module.exports = {
     reload: true,
   },
   scripts: {
-    files: ['js/*.js'],
-    tasks: ['jshint', 'concat', 'uglify'],
+    files: ['lib/js/*.js'],
+    tasks: ['concat', 'uglify'],
     options: {
       spawn: false,
     },

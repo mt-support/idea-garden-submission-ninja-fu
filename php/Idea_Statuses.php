@@ -1,65 +1,63 @@
 <?php
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+namespace Modern_Tribe\Idea_Garden;
 
 use WP_Post;
 
-/**
- * @todo add logic making 'pending' the default status for idea submissions
- */
 class Idea_Statuses {
+	/**
+	 * Order is significant: by default we order results partly
+	 * by post status - statuses that should be featured first
+	 * ought to be listed closer to the end of the array.
+	 */
 	const STATES = [
 		'internal' => [
 			'label'   => 'Internal',
 			'public'  => false,
-			'private' => true,
 		],
 		'pending' => [
 			'label'   => 'Pending Review',
+			'no_register' => true,
 			'public'  => false,
-			'private' => true,
 		],
 		'rejected' => [
 			'label'   => 'Rejected',
 			'public'  => true,
 			'private' => false,
 		],
+		'backlog' => [
+			'label'   => 'Backlog',
+			'public'  => true,
+		],
 		'planned' => [
 			'label'   => 'Planned',
 			'public'  => true,
-			'private' => false,
 		],
 		'started' => [
 			'label'   => 'Started',
 			'public'  => true,
-			'private' => false,
 		],
 		'in-development' => [
 			'label'   => 'In Development',
 			'public'  => true,
-			'private' => false,
 		],
 		'in-testing' => [
 			'label'   => 'In Testing',
 			'public'  => true,
-			'private' => false,
 		],
 		'complete' => [
 			'label'   => 'Complete',
 			'public'  => true,
-			'private' => false,
 		],
 		'trash' => [
-			'no_register' => true,
 			'label'       => 'Trash',
+			'no_register' => true,
 			'public'      => false,
-			'private'     => true,
 		]
 	];
 
-	public function __construct() {
+	public function setup() {
 		add_action( 'init', [ $this, 'register' ] );
 		add_action( 'admin_print_scripts-post.php', [ $this, 'idea_statuses_script' ] );
-		add_action( 'nf_sub_edit_after_status', [ $this, 'status_selector' ] );
 		add_filter( 'get_post_status', [ $this, 'filter_post_status' ], 10, 2 );
 	}
 
@@ -69,22 +67,12 @@ class Idea_Statuses {
 				continue;
 			}
 
+			if ( ! empty( $properties['public'] ) ) {
+				$properties['private'] = false;
+			}
+
 			register_post_status( $slug, $properties );
 		}
-	}
-
-	public function status_selector( $post ) {
-		print '<select name="post_status" id="idea-status-selector">';
-
-		$status = get_post_status( $post );
-
-		foreach ( self::STATES as $slug => $properties ) {
-			print '<option value="' . esc_attr( $slug ) . '" ' . selected( $slug === $status ) . '>'
-			    . esc_html( $properties['label'] )
-				. '</option>';
-		}
-
-		print '</select>';
 	}
 
 	/**
@@ -105,6 +93,7 @@ class Idea_Statuses {
 	}
 
 	public function idea_statuses_script() {
+		// @todo decide to either abandon this or fix to work with standard WP post editor
 		if ( 'nf_sub' === get_post_type() ) {
 			wp_enqueue_script( 'idea-garden-statuses', main()->url() . 'js/idea-statuses.js' );
 		}

@@ -1,12 +1,6 @@
 <?php
-/**
-	* @var array       $ideas
-	* @var Public_List $helper
-	*/
-
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+namespace Modern_Tribe\Idea_Garden;
 ?>
-
 <div class="ig-accordion">
 
 	<input id="panel-1" class="ig-accordion__panel" type="checkbox" name="panel" />
@@ -100,4 +94,4 @@ namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
 
 		<?php endforeach; ?>
 	
-	</section>
+</section>

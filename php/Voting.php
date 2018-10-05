@@ -1,11 +1,11 @@
 <?php
-namespace Modern_Tribe\Idea_Garden\Ninja_Fu;
+namespace Modern_Tribe\Idea_Garden;
 
 class Voting {
 	private $voting_assets_enqueued = false;
 
 	public function __construct() {
-		add_action( 'idea_garden.ninja_fu.submission_voting_form', [ $this, 'voting_form' ] );
+		add_action( 'idea_garden.submission_voting_form', [ $this, 'voting_form' ] );
 		add_action( 'wp_ajax_idea_garden.idea_vote', [ $this, 'vote_action' ] );
 	}
 
@@ -13,10 +13,10 @@ class Voting {
 		$votes = new Votes( (int) $idea->id );
 
 		View::render( 'voting-form', [
-				'idea_id'    => $idea->id,
-				'votes'      => $votes,
-				'user_voted' => $votes->is_supporter( get_current_user_id() ),
-			],
+			'idea_id'    => $idea->id,
+			'votes'      => $votes,
+			'user_voted' => $votes->is_supporter( get_current_user_id() ),
+		],
 			true
 		);
 

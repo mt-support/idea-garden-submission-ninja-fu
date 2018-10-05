@@ -1,7 +1,7 @@
 module.exports = {
   dist: {
     src: [
-      'lib/js/*.js',
+      'lib/js/*.js'
     ],
     dest: 'js/scripts.js'
   }
