@@ -4,12 +4,6 @@ namespace Modern_Tribe\Idea_Garden\Taxonomies;
 use Modern_Tribe\Idea_Garden\Ideas;
 
 abstract class Abstract_Taxonomy {
-	protected $args;
-
-	public function __construct() {
-		$this->args = $this->get_args();
-	}
-
 	abstract public function get_args();
 
 	public function setup() {
@@ -17,7 +11,7 @@ abstract class Abstract_Taxonomy {
 	}
 
 	public function register() {
-		register_taxonomy( static::TAXONOMY, 			Ideas::POST_TYPE, $args );
+		register_taxonomy( static::TAXONOMY, Ideas::POST_TYPE, $this->get_args() );
 		register_taxonomy_for_object_type( static::TAXONOMY, Ideas::POST_TYPE );
 	}
 
