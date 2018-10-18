@@ -6,7 +6,7 @@ class Tags extends Abstract_Taxonomy {
 
 	public function get_args() {
 		$args = [
-			'hierarchical' => true,
+			'hierarchical' => false,
 			'labels'       => [
 				'name'              => _x( 'Tags', 'idea tag taxonomy', 'idea-garden' ),
 				'singular_name'     => _x( 'Tag', 'idea tag taxonomy', 'idea-garden' ),
