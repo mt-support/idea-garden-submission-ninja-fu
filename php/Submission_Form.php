@@ -1,6 +1,8 @@
 <?php
 namespace Modern_Tribe\Idea_Garden;
 
+use Modern_Tribe\Idea_Garden\Taxonomies\Categories as Idea_Categories;
+
 class Submission_Form {
 	public function setup() {
 		add_action( 'wp_ajax_submit_idea', [ $this, 'listen' ] );

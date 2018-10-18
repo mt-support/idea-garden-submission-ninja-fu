@@ -1,6 +1,8 @@
 <?php
 namespace Modern_Tribe\Idea_Garden;
 
+use Modern_Tribe\Idea_Garden\Taxonomies\Categories as Idea_Categories;
+
 class Ideas {
 	const POST_TYPE = 'idea_garden_idea';
 
