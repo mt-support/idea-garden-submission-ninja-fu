@@ -36,6 +36,9 @@ class Ideas {
 				'excerpt',
 				'comments'
 			],
+			'taxonomies'         => [
+				'post_tag',
+			],
 		] );
 	}
 
