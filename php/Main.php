@@ -99,7 +99,7 @@ class Main {
 	}
 
 	public function idea_tags(): Idea_Tags {
-		return empty( $this->idea_tags ) ? $this->idea_tags = new Idea_Tags : $this->idea_categories;
+		return empty( $this->idea_tags ) ? $this->idea_tags = new Idea_Tags : $this->idea_tags;
 	}
 
 	public function ideas(): Ideas {
