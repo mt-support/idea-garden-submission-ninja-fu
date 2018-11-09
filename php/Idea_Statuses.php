@@ -24,8 +24,8 @@ class Idea_Statuses {
 			'public'  => true,
 			'private' => false,
 		],
-		'backlog' => [
-			'label'   => 'Backlog',
+		'proposed' => [
+			'label'   => 'Proposed',
 			'public'  => true,
 		],
 		'planned' => [

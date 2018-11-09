@@ -1,6 +1,9 @@
 <?php
 namespace Modern_Tribe\Idea_Garden;
 
+use Modern_Tribe\Idea_Garden\Taxonomies\Categories as Idea_Categories;
+use Modern_Tribe\Idea_Garden\Taxonomies\Tags as Idea_Tags;
+
 class Ideas {
 	const POST_TYPE = 'idea_garden_idea';
 
@@ -10,6 +13,7 @@ class Ideas {
 	public function setup() {
 		$this->categories();
 		$this->statuses();
+		$this->tags();
 
 		add_action( 'init', [ $this, 'register_post_type' ] );
 	}
@@ -55,5 +59,14 @@ class Ideas {
 		}
 
 		return $this->statuses;
+	}
+
+	public function tags(): Idea_Tags {
+		if ( empty( $this->tags ) ) {
+			$this->tags = new Idea_Tags;
+			$this->tags->setup();
+		}
+
+		return $this->tags;
 	}
 }

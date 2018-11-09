@@ -20,7 +20,7 @@
 
     @media #{$pool} {
       font-size: 16px;
-    } 
+    }
   }
 
   &__footer {
@@ -46,7 +46,7 @@
     &--internal {
       background-color: var(--internal-color);
     }
-    
+
     &--pending {
       background-color: var(--pending-color);
     }
@@ -54,13 +54,13 @@
     &--rejected {
       background-color: var(--rejected-color);
     }
-    
+
     &--planned {
       background-color: var(--planned-color);
     }
 
-    &--backlog {
-      background-color: var(--backlog-color);
+    &--proposed {
+      background-color: var(--proposed-color);
     }
 
     &--started {

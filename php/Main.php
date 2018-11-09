@@ -1,6 +1,8 @@
 <?php
 namespace Modern_Tribe\Idea_Garden;
 
+use Modern_Tribe\Idea_Garden\Taxonomies\Categories as Idea_Categories;
+use Modern_Tribe\Idea_Garden\Taxonomies\Tags as Idea_Tags;
 use Modern_Tribe\Idea_Garden\Commands\Main as Commands;
 use stdClass;
 
@@ -9,11 +11,12 @@ class Main {
 	private $plugin_url = '';
 
 	private $commands;
+	private $idea_categories;
 	private $idea_list;
+	private $idea_tags;
 	private $ideas;
 	private $submission_form;
 	private $voting;
-
 
 	public function __construct( string $plugin_dir, string $plugin_url ) {
 		$this->plugin_dir = $plugin_dir;
@@ -22,7 +25,9 @@ class Main {
 		$this->commands();
 		$this->ideas();
 		$this->submission_form();
+		$this->idea_categories();
 		$this->idea_list();
+		$this->idea_tags();
 		$this->voting();
 
 		add_action( 'wp_ajax_update_idea_garden_public_list', [ $this, 'public_list_updates' ] );
@@ -82,6 +87,10 @@ class Main {
 		return empty( $this->commands ) ? $this->commands = new Commands : $this->commands;
 	}
 
+	public function idea_categories(): Idea_Categories {
+		return empty( $this->idea_categories ) ? $this->idea_categories = new Idea_Categories : $this->idea_categories;
+	}
+
 	public function idea_list(): Idea_List {
 		if ( empty( $this->idea_list ) ) {
 			$this->idea_list = new Idea_List;
@@ -89,6 +98,10 @@ class Main {
 		}
 
 		return $this->idea_list;
+	}
+
+	public function idea_tags(): Idea_Tags {
+		return empty( $this->idea_tags ) ? $this->idea_tags = new Idea_Tags : $this->idea_tags;
 	}
 
 	public function ideas(): Ideas {
@@ -108,7 +121,7 @@ class Main {
 
 		return $this->submission_form;
 	}
-	
+
 	public function voting(): Voting {
 		return empty( $this->voting ) ? $this->voting = new Voting : $this->voting;
 	}

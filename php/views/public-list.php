@@ -39,7 +39,7 @@ namespace Modern_Tribe\Idea_Garden;
 				<option value="">In Development</option>
 				<option value="">In Testing</option>
 				<option value="">Completed</option>
-				<option value="">Backlog</option>
+				<option value="">Proposed</option>
 			</select>
 
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@ namespace Modern_Tribe\Idea_Garden;
 					<h1> <?php echo esc_html( $idea->post_title ); ?> </h1>
 
 					<span class="ig-idea-list__product">
-						<?php echo esc_html( $selected_product ); ?> 
+						<?php echo esc_html( $selected_product ); ?>
 					</span>
 			</div>
 
@@ -83,7 +83,7 @@ namespace Modern_Tribe\Idea_Garden;
 							<path d="M5,3 C3.896,3 2.91,3.433 2.187,4.156 C1.463,4.88 1,5.895 0.999,7 C0.999,8.105 1.463,9.088 2.187,9.813 L9,16.657 L15.844,9.813 C16.568,9.089 17,8.105 17,7 C17,5.895 16.568,4.88 15.844,4.156 L15.813,4.156 C15.089,3.432 14.104,3 13,3 C11.896,3 10.911,3.433 10.187,4.156 C9.463,4.88 9.115,5.723 8.999,6 C8.879,5.723 8.536,4.88 7.811,4.156 C7.087,3.432 6.103,3 4.998,3 L5,3 Z" id="Shape"></path>
 						</g>
 					</svg>
-		
+
 					<?php do_action( 'idea_garden.ninja_fu.submission_voting_form', $idea ); ?>
 
 					<span class="ig-idea-list__status ig-idea-list__status--<?php echo get_post_status( $idea->ID ) ?>">
@@ -93,5 +93,5 @@ namespace Modern_Tribe\Idea_Garden;
 		</div>
 
 		<?php endforeach; ?>
-	
+
 </section>

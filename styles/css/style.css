@@ -338,7 +338,7 @@ template {
   --internal-color: #2B474F;
   --pending-color: #F4AF49;
   --rejected-color: #E4554A;
-  --backlog-color: #416D53;
+  --proposed-color: #416D53;
   --planned-color: #078E87;
   --started-color: #00A38E;
   --in-dev-color: #6E61A9;
@@ -533,8 +533,8 @@ template {
 .ig-idea-list__status--planned {
   background-color: var(--planned-color);
 }
-.ig-idea-list__status--backlog {
-  background-color: var(--backlog-color);
+.ig-idea-list__status--proposed {
+  background-color: var(--proposed-color);
 }
 .ig-idea-list__status--started {
   background-color: var(--started-color);
