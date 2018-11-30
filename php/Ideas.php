@@ -2,6 +2,7 @@
 namespace Modern_Tribe\Idea_Garden;
 
 use Modern_Tribe\Idea_Garden\Taxonomies\Categories as Idea_Categories;
+use Modern_Tribe\Idea_Garden\Taxonomies\Statuses as Idea_Statuses;
 use Modern_Tribe\Idea_Garden\Taxonomies\Tags as Idea_Tags;
 
 class Ideas {
