@@ -2,9 +2,7 @@
 namespace Modern_Tribe\Idea_Garden\Commands;
 
 use Faker\Factory as Content_Generator;
-use Modern_Tribe\Idea_Garden\Ninja_Forms;
 use Modern_Tribe\Idea_Garden\Votes;
-use NF_Abstracts_ModelFactory;
 use WP_CLI;
 use WP_User_Query;
 
@@ -21,16 +19,13 @@ class Main {
 
 		$this->content_generator = Content_Generator::create();
 
-		WP_CLI::add_command( 'ideagarden', $this );
+		WP_CLI::add_command( 'ideas', $this );
 	}
 
 	/**
 	 * Generates fake idea data for testing.
 	 *
 	 * ## OPTIONS
-	 *
-	 * --form_id=<form_id>
-	 * : The ID of the idea submission form
 	 *
 	 * [--num_ideas=<num_ideas>]
 	 * : The number of ideas that should be generated (defaults to 100)
@@ -45,12 +40,7 @@ class Main {
 	 * : If there are insufficient user accounts, register votes from non-existent users
 	 */
 	public function generate( $args, $assoc_args ) {
-		if ( ! function_exists( 'ninja_forms' ) ) {
-			WP_CLI::error( 'Cannot compute // cannot compute // ninja forms must be active // error error brrr gz beep' );
-		}
-
 		$defaults = [
-			'form_id'       => 0,
 			'num_ideas'     => 100,
 			'min_votes'     => 0,
 			'max_votes'     => 5,
@@ -58,20 +48,11 @@ class Main {
 		];
 
 		$args = array_merge( $defaults, $assoc_args );
-		$form = ninja_forms()->form( $args['form_id'] );
-		$fields = Ninja_Forms::get_form_fields_array( $args['form_id'] );
-
-		if ( empty( $fields ) ) {
-			WP_CLI::error( 'Invalid form ID or else the form could not be loaded.' );
-		}
 
 		for ( $i = 0; $i < $args['num_ideas']; $i++ ) {
 			$this->generate_idea(
-				$form,
-				(int) $args['form_id'],
-				$fields,
-				(int) $args['min_votes'],
-				(int) $args['max_votes'],
+				(int)  $args['min_votes'],
+				(int)  $args['max_votes'],
 				(bool) $args['do_fake_votes']
 			);
 		}
@@ -80,38 +61,14 @@ class Main {
 	/**
 	 * Creates a new idea submission and applies votes.
 	 *
-	 * @param NF_Abstracts_ModelFactory $form
-	 * @param int $form_id
-	 * @param array $fields
 	 * @param int $min_votes
 	 * @param int $max_votes
 	 * @param bool $do_fake_votes
 	 */
-	private function generate_idea( NF_Abstracts_ModelFactory $form, int $form_id, array $fields, int $min_votes, int $max_votes, bool $do_fake_votes ) {
-		$fields     = $form->get_fields();
-		$submission = $form->sub()->get();
-
-		foreach( $fields as $field_id => $field ) {
-			$options = $field->get_setting( 'options' );
-
-			// Pick a random option, if this is a select/multiselect field
-			if ( ! empty( $options ) ) {
-				$value = (array) $options[ rand( 0, count( $options ) - 1 ) ]['value'];
-			}
-			// Otherwise supply lots of random text for textarea fields
-			elseif ( 'textarea' === $field->get_setting( 'type' ) ) {
-				$value = $this->get_paragraphs();
-			}
-			// Or slightly less random text for other fields
-			else {
-				$value = $this->content_generator->realText( rand( 30, 80 ) );
-			}
-
-			$submission->update_field_value( $field_id, $value );
-		}
-
-		$submission->save();
-		$this->add_votes( $submission->get_id(), $min_votes, $max_votes, $do_fake_votes );
+	private function generate_idea( int $min_votes = 0, int $max_votes = 100, bool $do_fake_votes ) {
+		$long_text = $this->get_paragraphs();
+		$short_text = $this->content_generator->realText( rand( 30, 80 ) );
+		$this->add_votes( $idea_id, $min_votes, $max_votes, $do_fake_votes );
 	}
 
 	private function get_paragraphs() {
@@ -135,13 +92,13 @@ class Main {
 	/**
 	 * Apply votes to our latest submission.
 	 *
-	 * @param int  $submission_id
+	 * @param int  $idea_id
 	 * @param int  $min_votes
 	 * @param int  $max_votes
 	 * @param bool $do_fake_votes
 	 */
-	private function add_votes( int $submission_id, int $min_votes, int $max_votes, bool $do_fake_votes ) {
-		$votes = new Votes( $submission_id );
+	private function add_votes( int $idea_id, int $min_votes, int $max_votes, bool $do_fake_votes ) {
+		$votes = new Votes( $idea_id );
 		$voters = $this->get_voters( rand( $min_votes, $max_votes ), $do_fake_votes );
 
 		foreach ( $voters as $voter_id ) {
