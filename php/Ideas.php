@@ -70,4 +70,25 @@ class Ideas {
 
 		return $this->tags;
 	}
+
+	/**
+	 * Builds a new idea post.
+	 *
+	 * If it cannot be built, returns zero. Else returns the new
+	 * post ID.
+	 *
+	 * @param string $title
+	 * @param string $description
+	 *
+	 * @return int
+	 */
+	public function make_idea( string $title, string $description = '' ) {
+		$new_idea = wp_insert_post( [
+			'post_type' => self::POST_TYPE,
+			'post_title' => $title,
+			'post_content' => $description,
+		] );
+
+		return ! $new_idea || is_wp_error( $new_idea ) ? 0 : absint( $new_idea );
+	}
 }

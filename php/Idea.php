@@ -9,30 +9,105 @@ class Idea {
 	/** @var WP_Post */
 	private $post;
 
-	/**
-	 * Encapsulates an existing idea or can be used to create a new idea.
-	 *
-	 * @param int|null $post_id
-	 *
-	 * @throws Invalid_Idea_Exception
-	 */
-	public function __construct( int $post_id = null ) {
-		if ( is_int( $post_id ) ) {
-			$this->load( $post_id );
-		}
-	}
+	/** @var Votes */
+	private $votes;
 
 	/**
+	 * Represents an idea.
+	 *
 	 * @param int $post_id
 	 *
 	 * @throws Invalid_Idea_Exception
 	 */
-	private function load( int $post_id ) {
+	public function __construct( int $post_id ) {
 		$this->post = get_post( $post_id );
 
 		if ( $this->post->post_type !== Ideas::POST_TYPE ) {
 			throw new Invalid_Idea_Exception();
 		}
+	}
+
+	/**
+	 * Returns the idea's post ID.
+	 *
+	 * @return int
+	 */
+	public function id(): int {
+		return $this->post->ID;
+	}
+
+	/**
+	 * Gets or sets the idea title.
+	 *
+	 * @param string|null $title
+	 *
+	 * @return string|null
+	 */
+	public function title( string $title = null ) {
+		return $this->post_field( 'post_title', $title );
+	}
+
+	/**
+	 * Gets or sets the idea description.
+	 *
+	 * @param string|null $description
+	 *
+	 * @return string|null
+	 */
+	public function description( string $description = null ) {
+		return $this->post_field( 'post_content', $description );
+	}
+
+	/**
+	 * Gets or sets the idea excerpt.
+	 *
+	 * @param string|null $excerpt
+	 *
+	 * @return string|null
+	 */
+	public function excerpt( string $excerpt = null ) {
+		return $this->post_field( 'post_excerpt', $excerpt );
+	}
+
+	/**
+	 * Gets or sets the idea author.
+	 *
+	 * @param int|null $user_id
+	 *
+	 * @return int|null
+	 */
+	public function author( int $user_id = null ) {
+		return $this->post_field( 'post_author', $user_id );
+	}
+
+	/**
+	 * Gets or sets the specified post field.
+	 *
+	 * @param string $field
+	 * @param null $value
+	 *
+	 * @return mixed
+	 */
+	private function post_field( string $field, $value = null ) {
+		if ( $value !== null ) {
+			wp_update_post( [
+				'ID' => $this->post->ID,
+				$field => $value
+			] );
+		}
+
+		return get_post_field( $field, $this->post->ID );
+	}
+
+	/**
+	 * @return Votes
+	 */
+	public function votes(): Votes {
+		if ( empty( $this->votes ) ) {
+			$this->votes = new Votes( $this->post->ID );
+		}
+
+		return $this->votes;
 	}
 
 	/**

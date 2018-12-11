@@ -66,23 +66,27 @@ abstract class Abstract_Taxonomy {
 	/**
 	 * Creates a new term within the current taxonomy.
 	 *
+	 * Returns the term ID if successfully created else zero.
+	 *
 	 * @param string string $name
 	 * @param string string $slug
 	 * @param string string $description
 	 *
-	 * @return bool
+	 * @return int
 	 */
-	public function create_term( string $name = '', string $slug = '', string $description = '' ) {
-		if ( empty( $slug ) ) {
-			$slug = sanitize_title( $slug );
-		}
+	public function create_term( string $name = '', string $slug = '', string $description = '' ): int {
+		$slug = empty( $slug )
+			? sanitize_title( $name )
+			: sanitize_title( $slug );
 
 		$result = wp_insert_term( $name, static::TAXONOMY, [
 			'description' => $description,
 			'slug' => $slug,
 		] );
 
-		return is_wp_error( $result ) ? false : true;
+		return ! is_wp_error( $result ) && is_array( $result )
+			? $result['term_id']
+			: 0;
 	}
 
 
