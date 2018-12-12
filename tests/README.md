@@ -18,7 +18,7 @@ By default, the installation steps places a copy of WordPress (and the WordPress
 directory. For that reason, you _may_ periodically need to repeat the installation procedure. To run the suite, working 
 from within the plugin's root directory, do:
 
-`vendor/bin/phpunit --bootstrap tests/bootstrap.php --test-suffix .php tests`
+`vendor/bin/phpunit`
 
 It is *possible* to use your global PHPUnit, if you have one, however the provided PHPUnit is a version which will work 
 successfully until [core WP bug 43218](https://core.trac.wordpress.org/ticket/43218) is resolved.
