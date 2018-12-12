@@ -54,7 +54,7 @@ class Votes {
 	 * @return bool
 	 */
 	public function is_supporter( int $user_id ): bool {
-		return in_array( $user_id, $this->get_supporters( true ) );
+		return in_array( $this->idea_id, get_user_meta( $user_id, self::SUPPORTERS_KEY ) );
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Votes {
 			return;
 		}
 
-		update_user_meta( $user_id, self::SUPPORTERS_KEY, true );
+		add_user_meta( $user_id, self::SUPPORTERS_KEY, $this->idea_id );
 		$this->recount();
 	}
 
@@ -77,7 +77,7 @@ class Votes {
 	 * @param int $user_id
 	 */
 	public function remove_vote( int $user_id ) {
-		delete_user_meta( $user_id, self::SUPPORTERS_KEY );
+		delete_user_meta( $user_id, self::SUPPORTERS_KEY, $this->idea_id );
 		$this->recount();
 	}
 
@@ -86,6 +86,6 @@ class Votes {
 	 */
 	public function recount() {
 		$new_count = count( $this->get_supporters( true ) );
-		update_user_meta( $this->idea_id, self::SUPPORTERS_COUNT_KEY, $new_count );
+		update_post_meta( $this->idea_id, self::SUPPORTERS_COUNT_KEY, $new_count );
 	}
 }
