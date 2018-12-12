@@ -46,19 +46,17 @@ class Votes extends Base_Test {
 	function can_list_ideas_supported_by_a_user() {
 		$user = $this->generate_fake_user();
 		$voter = new Voter( $user );
+
 		$idea_1 = new Idea( $this->generate_fake_idea() );
 		$idea_2 = new Idea( $this->generate_fake_idea() );
+		$idea_3 = new Idea( $this->generate_fake_idea() );
 
 		$idea_1->votes()->add_vote( $user );
 		$idea_2->votes()->add_vote( $user );
 
-		// We don't know what the fake idea post IDs will be, but if we combine them we
-		// will have a new value we know the user has noted voted for
-		$unsupported_idea = $idea_1->id() + $idea_2->id();
-
-		$this->assertContains( $idea_1->id(), $voter->supported_ideas(), 'List of ideas supported by user is accurate' );
-		$this->assertContains( $idea_2->id(), $voter->supported_ideas(), 'List of ideas supported by user is accurate' );
-		$this->assertNotContains( $unsupported_idea, $voter->supported_ideas(), 'List of ideas supported by user is accurate' );
+		$this->assertContains( $idea_1->id(), $voter->supported_ideas(), 'List of ideas the user supports includes the ID of an idea they voted for' );
+		$this->assertContains( $idea_2->id(), $voter->supported_ideas(), 'List of ideas the user supports includes the ID of an idea they voted for' );
+		$this->assertNotContains( $idea_3->id(), $voter->supported_ideas(), 'List of ideas the user supports does not include the ID of an idea they did not vote for' );
 	}
 
 	private function generate_fake_idea(): int {
@@ -69,14 +67,12 @@ class Votes extends Base_Test {
 	}
 
 	private function generate_fake_user(): int  {
-		$usr = wp_insert_user( [
+		return wp_insert_user( [
 			'user_login' => Fake_Content::create()->name,
 			'user_email' => Fake_Content::create()->email,
 			'user_pass' => md5( time() ),
 			'role' => 'subscriber',
 		] );
-
-		return $usr;
 	}
 
 }
