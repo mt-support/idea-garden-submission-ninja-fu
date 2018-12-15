@@ -3,7 +3,7 @@
 Essential pre-requisites:
 
 * Run `composer install`
-* Run `bin/install-wp-tests.php <arguments>`
+* Run `bin/install-wp-tests.sh <arguments>`
 
 For the second of those commands, the arguments are (in order):
 

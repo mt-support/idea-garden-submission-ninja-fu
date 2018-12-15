@@ -3,6 +3,7 @@ namespace Modern_Tribe\Idea_Garden\Taxonomies;
 
 class Statuses extends Abstract_Taxonomy {
 	const TAXONOMY = 'idea_garden_statuses';
+	const PUBLIC_INTERNAL_FLAG = 'idea_garden_public_status';
 
 	public function setup() {
 		parent::setup();
@@ -32,10 +33,6 @@ class Statuses extends Abstract_Taxonomy {
 			'show_in_rest' => true,
 			'show_ui'      => true,
 		];
-	}
-
-	public function is_valid_Status_id( $Status_id ): bool {
-		return $this->is_valid_term_id( $Status_id );
 	}
 
 	public function new_status_form() {
@@ -76,5 +73,31 @@ class Statuses extends Abstract_Taxonomy {
 				</td>
 			</tr>
 		";
+	}
+
+	/**
+	 * Marks the specified status as 'public' or, if false is passed, as 'internal'.
+	 *
+	 * @param bool $public
+	 *
+	 * @return bool
+	 */
+	public function set_public( int $status_id, bool $public = true ): bool {
+		return $this->set_boolean_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, $public );
+	}
+
+	/**
+	 * Returns true if the specified status is 'public', or false if 'internal'.
+	 *
+	 * If the public flag has not explcitly been set, returns false by default (however the
+	 * default can be optionally specified).
+	 *
+	 * @param int $status_id
+	 * @param bool $default
+	 *
+	 * @return bool
+	 */
+	public function is_public( int $status_id, bool $default = false ): bool {
+		return $this->get_boolean_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, $default );
 	}
 }

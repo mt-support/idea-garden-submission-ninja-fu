@@ -2,6 +2,7 @@
 namespace Modern_Tribe\Idea_Garden;
 
 use Modern_Tribe\Idea_Garden\Taxonomies\Categories as Idea_Categories;
+use Modern_Tribe\Idea_Garden\Taxonomies\Statuses as Idea_Statuses;
 use Modern_Tribe\Idea_Garden\Taxonomies\Tags as Idea_Tags;
 use Modern_Tribe\Idea_Garden\Commands\Main as Commands;
 use stdClass;
@@ -13,6 +14,7 @@ class Main {
 	private $commands;
 	private $idea_categories;
 	private $idea_list;
+	private $idea_statuses;
 	private $idea_tags;
 	private $ideas;
 	private $submission_form;
@@ -98,6 +100,10 @@ class Main {
 		}
 
 		return $this->idea_list;
+	}
+
+	public function idea_statuses(): Idea_Statuses {
+		return empty( $this->idea_statuses ) ? $this->idea_statuses = new Idea_Statuses() : $this->idea_statuses;
 	}
 
 	public function idea_tags(): Idea_Tags {
