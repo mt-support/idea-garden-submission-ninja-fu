@@ -2,6 +2,8 @@
 namespace Modern_Tribe\Idea_Garden\Taxonomies;
 
 class Statuses extends Abstract_Taxonomy {
+	use Boolean_Flags;
+
 	const TAXONOMY = 'idea_garden_statuses';
 	const PUBLIC_INTERNAL_FLAG = 'idea_garden_public_status';
 
