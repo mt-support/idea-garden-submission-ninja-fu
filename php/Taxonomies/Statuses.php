@@ -1,6 +1,8 @@
 <?php
 namespace Modern_Tribe\Idea_Garden\Taxonomies;
 
+use WP_Term;
+
 class Statuses extends Abstract_Taxonomy {
 	const TAXONOMY = 'idea_garden_statuses';
 	const PUBLIC_INTERNAL_FLAG = 'idea_garden_public_status';
@@ -94,14 +96,14 @@ class Statuses extends Abstract_Taxonomy {
 	 * @return bool
 	 */
 	public function set_public( int $status_id, bool $public = true ): bool {
-		$update = update_post_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, $public ? 'public' : 'internal' );
+		$update = update_term_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, $public ? 'public' : 'internal' );
 		return $update === false ? false : true;
 	}
 
 	/**
 	 * Returns true if the specified status is 'public', or false if 'internal'.
 	 *
-	 * If the public flag has not explcitly been set, returns false by default (however the
+	 * If the public flag has not explicitly been set, returns false by default (however the
 	 * default can be optionally specified).
 	 *
 	 * @param int $status_id
@@ -110,7 +112,83 @@ class Statuses extends Abstract_Taxonomy {
 	 * @return bool
 	 */
 	public function is_public( int $status_id, bool $default = false ): bool {
-		$status = get_post_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, true );
+		$status = get_term_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, true );
 		return empty( $status ) ? $default : $status === 'public';
+	}
+
+	/**
+	 * Returns a list of all terms marked as intended to be publicly visible.
+	 *
+	 * By default, only terms where the visibility flag is explicitly set to
+	 * 'public' will be returned. Setting optional param $strict to false will
+	 * ensure that terms where the flag has not been set at all are also
+	 * included.
+	 *
+	 * @param bool $strict
+	 *
+	 * @return WP_Term[]
+	 */
+	public function list_public( bool $strict = true ): array {
+		// Always look for terms where the visibility flag is 'public'
+		$meta_query = [ [
+			'key' => self::PUBLIC_INTERNAL_FLAG,
+			'value' => 'public',
+		] ];
+
+		// If not strict, also include terms where the visibility flag has not been set
+		if ( ! $strict ) {
+			$meta_query['relation'] = 'OR';
+
+			$meta_query[] = [
+				'key' => self::PUBLIC_INTERNAL_FLAG,
+				'compare' => 'NOT EXISTS',
+			];
+		}
+
+		$terms = get_terms( [
+			'hide_empty' => false,
+			'taxonomy'   => static::TAXONOMY,
+			'meta_query' => $meta_query,
+		] );
+
+		return is_array( $terms ) ? $terms : [];
+	}
+
+	/**
+	 * Returns a list of all terms marked as intended to be used internally only.
+	 *
+	 * By default, only terms where the visibility flag is explicitly set to
+	 * 'internal' will be returned. Setting optional param $strict to false will
+	 * ensure that terms where the flag has not been set at all are also
+	 * included.
+	 *
+	 * @param bool $strict
+	 *
+	 * @return WP_Term[]
+	 */
+	public function list_internal( bool $strict = true ): array {
+		// Always look for terms where the visibility flag is 'public'
+		$meta_query = [ [
+			'key' => self::PUBLIC_INTERNAL_FLAG,
+			'value' => 'internal',
+		] ];
+
+		// If not strict, also include terms where the visibility flag has not been set
+		if ( ! $strict ) {
+			$meta_query['relation'] = 'OR';
+
+			$meta_query[] = [
+				'key' => self::PUBLIC_INTERNAL_FLAG,
+				'compare' => 'NOT EXISTS',
+			];
+		}
+
+		$terms = get_terms( [
+			'hide_empty' => false,
+			'taxonomy'   => static::TAXONOMY,
+			'meta_query' => $meta_query,
+		] );
+
+		return is_array( $terms ) ? $terms : [];
 	}
 }
