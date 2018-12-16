@@ -2,15 +2,17 @@
 namespace Modern_Tribe\Idea_Garden\Taxonomies;
 
 class Statuses extends Abstract_Taxonomy {
-	use Boolean_Flags;
-
 	const TAXONOMY = 'idea_garden_statuses';
 	const PUBLIC_INTERNAL_FLAG = 'idea_garden_public_status';
 
 	public function setup() {
 		parent::setup();
-		add_action( self::TAXONOMY . '_add_form_fields', [ $this, 'new_status_form' ] );
-		add_action( self::TAXONOMY . '_edit_form_fields', [ $this, 'edit_status_form' ] );
+
+		add_action( self::TAXONOMY . '_add_form_fields', [ $this, 'add_status_field' ] );
+		add_action( self::TAXONOMY . '_edit_form_fields', [ $this, 'add_status_field' ] );
+
+		add_action( 'created_'. self::TAXONOMY, [ $this, 'save_status_field' ] );
+		add_action( 'edited_'. self::TAXONOMY, [ $this, 'save_status_field' ] );
 	}
 
 	public function get_args() {
@@ -37,29 +39,16 @@ class Statuses extends Abstract_Taxonomy {
 		];
 	}
 
-	public function new_status_form() {
+	public function add_status_field() {
 		$label = __( 'Visibility', 'idea-garden' );
 		$public = _x( 'Public', 'status visibility', 'idea-garden' );
 		$internal = _x( 'Internal', 'status visibility', 'idea-garden' );
 		$explanation = __( 'If set to internal, the status will not be exposed to front-end users.', 'idea-garden' );
 
-		print "
-			<div class='form-field internal-flag-wrap'>
-				<label for='internal'> $label </label>
-				<select name='internal'>
-					<option value='public'> $public </option>
-					<option value='internal'> $internal </option>				
-				</select>
-				<p> $explanation </p>
-			</div>
-		";
-	}
-
-	public function edit_status_form() {
-		$label = __( 'Visibility', 'idea-garden' );
-		$public = _x( 'Public', 'status visibility', 'idea-garden' );
-		$internal = _x( 'Internal', 'status visibility', 'idea-garden' );
-		$explanation = __( 'If set to internal, the status will not be exposed to front-end users.', 'idea-garden' );
+		$tag_id = (int) ( $GLOBALS['tag_ID'] ?? 0 );
+		$is_public_selected = selected( $this->is_public( $tag_id, false ), true, false );
+		$is_internal_selected = selected( ! $is_public_selected, true, false );
+		$security = wp_nonce_field( 'set_status_flag', 'status_public', false, true );
 
 		print "
 			<tr class='form-field internal-flag-wrap'>
@@ -67,25 +56,46 @@ class Statuses extends Abstract_Taxonomy {
 					<label for='internal'> $label </label>
 				</th>
 				<td>
-					<select name='internal'>
-						<option value='public'> $public </option>
-						<option value='internal'> $internal </option>				
+					<select name='status_public_internal'>
+						<option value='public' $is_public_selected> $public </option>
+						<option value='internal' $is_internal_selected> $internal </option>				
 					</select>
 					<p class='description'> $explanation </p>
+					$security
 				</td>
 			</tr>
 		";
 	}
 
 	/**
+	 * Fires when a status term is created or updated and sets the public/internal flag.
+	 *
+	 * @param int $tag_id
+	 */
+	public function save_status_field( int $tag_id ) {
+		if (
+			! isset( $_POST['status_public_internal'] )
+			|| ! current_user_can( get_taxonomy( self::TAXONOMY )->cap->edit_terms )
+			|| ! wp_verify_nonce( $_POST['status_public'] ?? '', 'set_status_flag' )
+		) {
+			return;
+		}
+
+		$set_to_public = $_POST['status_public_internal'] === 'public';
+		$this->set_public( $tag_id, $set_to_public );
+	}
+
+	/**
 	 * Marks the specified status as 'public' or, if false is passed, as 'internal'.
 	 *
+	 * @param int $status_id
 	 * @param bool $public
 	 *
 	 * @return bool
 	 */
 	public function set_public( int $status_id, bool $public = true ): bool {
-		return $this->set_boolean_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, $public );
+		$update = update_post_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, $public ? 'public' : 'internal' );
+		return $update === false ? false : true;
 	}
 
 	/**
@@ -100,6 +110,7 @@ class Statuses extends Abstract_Taxonomy {
 	 * @return bool
 	 */
 	public function is_public( int $status_id, bool $default = false ): bool {
-		return $this->get_boolean_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, $default );
+		$status = get_post_meta( $status_id, self::PUBLIC_INTERNAL_FLAG, true );
+		return empty( $status ) ? $default : $status === 'public';
 	}
 }
