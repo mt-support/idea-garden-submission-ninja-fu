@@ -68,6 +68,8 @@ class Votes {
 		}
 
 		add_user_meta( $user_id, self::SUPPORTERS_KEY, $this->idea_id );
+		( new Voter( $user_id ) )->log_activity( $this->idea_id, Voter::ADDED_VOTE );
+
 		$this->recount();
 	}
 
@@ -77,7 +79,13 @@ class Votes {
 	 * @param int $user_id
 	 */
 	public function remove_vote( int $user_id ) {
+		if ( ! $this->is_supporter( $user_id ) ) {
+			return;
+		}
+
 		delete_user_meta( $user_id, self::SUPPORTERS_KEY, $this->idea_id );
+		( new Voter( $user_id ) )->log_activity( $this->idea_id, Voter::REMOVED_VOTE );
+
 		$this->recount();
 	}
 
